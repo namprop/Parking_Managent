@@ -7,9 +7,9 @@
 
     <div class="login-container">
         <h2>Đăng nhập Admin</h2>
-        @if (session('error'))
+        @if (session('notification'))
             <div class="alert alert-danger">
-                {{ session('error') }}
+                {{ session('notification') }}
             </div>
         @endif
 

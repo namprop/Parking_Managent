@@ -23,7 +23,7 @@ class IndexController extends Controller
     {
         $vehicles = $this->vehicleService->all();
 
-        dd($vehicles);
-        // return view('front.parking.index',compact('vehicles'));
+        // dd($vehicles);
+        return view('front.parking.index',compact('vehicles'));
     }
 }

@@ -28,7 +28,7 @@ class HomeController extends Controller
             }
             return "Success";
         } else {
-            return "No Success";
+            return back()->with('notification', 'Error.');
         }
     }
 

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('parking_tickets', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('vehicle_id');
+            $table->unsignedBigInteger('vehicle_id')->nullable();
             $table->unsignedBigInteger('parking_slot_id');
             $table->string('license_plate');
             $table->timestamp('check_in')->useCurrent();
