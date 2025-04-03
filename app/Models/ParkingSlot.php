@@ -8,7 +8,7 @@ class ParkingSlot extends Model
 {
     //
 
-    protected $table = " parking_slots";
+    protected $table = "parking_slots";
     protected $primaryKey = "id";
     protected $guarded = [];
 

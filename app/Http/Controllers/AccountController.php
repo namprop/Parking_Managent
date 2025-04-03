@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Service\User\UserServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Utilities\Constant;
 
 class AccountController extends Controller
 {
     //
+
     public function login( ){
 
         return view('front.account.login');
@@ -17,14 +20,17 @@ class AccountController extends Controller
         $credentials = [
             'email' => $request->input('email'),
             'password' => $request->input('password'),
-            'level' => 0,
+            'level' => Constant::user_level_client,
         ];
 
 
-        if (Auth::attempt($credentials)) {
-            return 'Success';
+        $remember = $request->has('remember');
+    
+        if (Auth::attempt($credentials, $remember)) {
+            $userId = Auth::id(); 
+            return redirect()->intended("/show/$userId"); 
         } else {
-            return 'fail';
+            return back()->with('notification', 'ERROR: Email and password is wrong');
         }
         
     }

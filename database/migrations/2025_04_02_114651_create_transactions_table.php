@@ -31,5 +31,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('transactions');
+        
+        Schema::table('parking_tickets', function (Blueprint $table) {
+            $table->dropColumn('amount'); // Xóa cột amount nếu rollback migration
+        });
     }
 };
