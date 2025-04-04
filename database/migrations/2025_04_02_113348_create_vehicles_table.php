@@ -12,14 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('vehicles', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->string('license_plate')->unique();
-            $table->string('vehicle_type'); // Ô tô, xe máy, v.v.
-            $table->string('brand')->nullable(); // Hãng xe (Toyota, Honda, v.v.)
+            $table->id(); 
+            $table->unsignedBigInteger('vehicle_types_id');
+            $table->string('tennguoigui')->nullable(); 
+            $table->string('bienso')->unique(); // Biển số xe
+            $table->date('ngaygui'); // Ngày gửi
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+            // Foreign key constraints
+            $table->foreign('vehicle_types_id')->references('id')->on('vehicle_types')->onDelete('cascade');
         });
     }
 

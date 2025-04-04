@@ -11,13 +11,14 @@ class Transaction extends Model
     protected $primaryKey = "id";
     protected $guarded = [];
 
+    public function vehicle()
+    {
+        return $this->belongsTo(Vehicle::class, 'vehicle_id', 'id');
+    }
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function parkingTicket()
-    {
-        return $this->belongsTo(ParkingTicket::class);
-    }
+
 }

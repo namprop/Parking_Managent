@@ -67,55 +67,78 @@ class DatabaseSeeder extends Seeder
             ],
         ]);
 
-        DB::table('vehicles')->insert([
+        DB::table('vehicle_types')->insert([
             [
-                'user_id' => '3',
-                'license_plate' => '29X7-67895',
-                'vehicle_type' => 'motorbike',
-                'brand' => 'Honda',
+                'maloaixe' => 'XD',
+                'tenloaixe' => 'Xe Dap',
+
+            ],
+        ]);
+        DB::table('vehicle_types')->insert([
+            [
+                'maloaixe' => 'XM',
+                'tenloaixe' => 'Xe May',
+
+            ],
+        ]);
+        DB::table('vehicle_types')->insert([
+            [
+                'maloaixe' => 'OT',
+                'tenloaixe' => 'O To',
 
             ],
         ]);
 
         DB::table('vehicles')->insert([
             [
-                'user_id' => '4',
-                'license_plate' => '51B1-67895',
-                'vehicle_type' => 'motorbike',
-                'brand' => 'Suziki',
-
+                'vehicle_types_id' => '1',
+                'tennguoigui' => 'Nguyen Van A',
+                'bienso' => '',
+                'ngaygui' => '2024-04-03',
             ],
-        ]);
-
-        DB::table('vehicles')->insert([
             [
-                'user_id' => '5',
-                'license_plate' => '51B1-67894',
-                'vehicle_type' => 'motorbike',
-                'brand' => 'Suziki',
-
+                'vehicle_types_id' => '2',
+                'tennguoigui' => 'Nguyen Van B',
+                'bienso' => '22C1-67894',
+                'ngaygui' => '2024-04-03',
             ],
-        ]);
-
-        DB::table('parking_slots')->insert([
             [
-                'slot_number' => '3',
-                'status' => 'available',
-
+                'vehicle_types_id' => '3',
+                'tennguoigui' => 'Nguyen Van C',
+                'bienso' => '11H1-111111',
+                'ngaygui' => '2024-04-03',
             ],
         ]);
 
+        // DB::table('vehicles')->insert([
+        //     [
+        //         'user_id' => '5',
+        //         'license_plate' => '51B1-67894',
+        //         'vehicle_type' => 'motorbike',
+        //         'brand' => 'Suziki',
 
-        DB::table('parking_tickets')->insert([
-            [
-                'user_id' => '3',
-                'vehicle_id' => '1',
-                'parking_slot_id' => '1',
-                'license_plate' => '29X7-67895',
-                'check_in' => '2024-04-03 12:00:00',
-                'check_out' => '2024-04-03 13:00:00',
-            ],
-        ]);
+        //     ],
+        // ]);
+
+        // DB::table('parking_slots')->insert([
+        //     [
+        //         'slot_number' => '3',
+        //         'status' => 'available',
+
+        //     ],
+        // ]);
+
+
+        // DB::table('parking_tickets')->insert([
+        //     [
+        //         'user_id' => '3',
+        //         'vehicle_id' => '1',
+        //         'parking_slot_id' => '1',
+        //         'license_plate' => '29X7-67895',
+        //         'check_in' => '2024-04-03 12:00:00',
+        //         'check_out' => '2024-04-03 13:00:00',
+        //     ],
+        // ]);
 
 
         // DB::table('parking_tickets')->insert([
@@ -127,7 +150,7 @@ class DatabaseSeeder extends Seeder
         //         'transaction_date' => null
         //     ],
         // ]);
-        
+
 
     }
 }

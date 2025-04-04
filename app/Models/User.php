@@ -46,18 +46,7 @@ class User extends Authenticatable
         ];
     }
 
-    public function vehicles()
-    {
-        return $this->hasMany(Vehicle::class);
-    }
+    
 
-    public function tickets()
-    {
-        return $this->hasMany(ParkingTicket::class);
-    }
-
-    public function transactions()
-    {
-        return $this->hasMany(Transaction::class);
-    }
+    
 }

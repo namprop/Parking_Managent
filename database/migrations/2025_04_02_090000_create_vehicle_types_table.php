@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('parking_slots', function (Blueprint $table) {
+        Schema::create('vehicle_types', function (Blueprint $table) {
             $table->id();
-            $table->string('slot_number')->unique();
-            $table->enum('status', ['available', 'occupied'])->default('available');
+            $table->string('maloaixe')->unique(); // Mã loại xe (OT, XM, v.v.)
+            $table->string('tenloaixe'); // Tên loại xe (Ô tô, xe máy, v.v.)
             $table->timestamps();
         });
+
+        
     }
 
     /**
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('parking_slots');
+        Schema::dropIfExists('vehicle_types');
     }
 };

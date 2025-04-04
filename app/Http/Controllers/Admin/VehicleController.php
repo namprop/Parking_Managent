@@ -3,30 +3,30 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use App\Service\User\UserServiceInterface;
+use App\Service\Vehicle\VehicleServiceInterface;
+use App\Service\VehicleType\VehicleTypeServiceInterface;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class VehicleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
 
-    protected $userService;
+     protected $vehicleService;
+     protected $vehicleTypeService;
 
-    public function __construct(UserServiceInterface $userService)
+    public function __construct(VehicleServiceInterface $vehicleService, VehicleTypeServiceInterface $vehicleTypeService)
     {
-        $this->userService = $userService;
+        $this->vehicleTypeService = $vehicleTypeService;
+        $this->vehicleService = $vehicleService;
     }
-
 
     public function index()
     {
-        //
-        $users = $this->userService->all();
-        return view('admin.user.index',compact('users'));
-       
+        $vehicleTypes = $this->vehicleTypeService->all();
+        $vehicles = $this->vehicleService->all();
+        return view('admin.vehicle.index', compact('vehicles', 'vehicleTypes'));
     }
 
     /**
@@ -48,15 +48,16 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(string $id)
     {
         //
+
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit(string $id)
     {
         //
     }
@@ -64,7 +65,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -72,7 +73,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(string $id)
     {
         //
     }

@@ -18,7 +18,9 @@ Route::prefix('account')->group(function (){
 
 Route::prefix('admin')->middleware('admin.login')->group(function () {
     Route::redirect('', 'admin/user');
-    Route::resource('user', \App\Http\Controllers\Admin\UserController::class);   
+    Route::resource('vehicle', \App\Http\Controllers\Admin\VehicleController::class);   
+    Route::resource('vehicletype', \App\Http\Controllers\Admin\VehicleTypeController::class);
+    Route::resource('user', \App\Http\Controllers\Admin\UserController::class);
 });
 Route::prefix('admin/login')->group(function () {
     Route::get('', [App\Http\Controllers\Admin\HomeController::class, 'getLogin']);

@@ -3,22 +3,26 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+
 use App\Repositories\Vehicle\VehicleRepository;
 use App\Repositories\Vehicle\VehicleRepositoryInterface;
 use App\Service\Vehicle\VehicleService;
 use App\Service\Vehicle\VehicleServiceInterface;
+
 use App\Repositories\User\UserRepository;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Service\User\UserService;
 use App\Service\User\UserServiceInterface;
-use App\Repositories\ParkingSlot\ParkingSlotRepository;
-use App\Repositories\ParkingSlot\ParkingSlotRepositoryInterface;
-use App\Service\ParkingSlot\ParkingSlotService;
-use App\Service\ParkingSlot\ParkingSlotServiceInterface;
-use App\Repositories\ParkingTicket\ParkingTicketRepository;
-use App\Repositories\ParkingTicket\ParkingTicketRepositoryInterface;
-use App\Service\ParkingTicket\ParkingTicketService;
-use App\Service\ParkingTicket\ParkingTicketServiceInterface;
+
+use App\Repositories\Transaction\TransactionRepository;
+use App\Repositories\Transaction\TransactionRepositoryInterface;
+use App\Service\Transaction\TransactionService;
+use App\Service\Transaction\TransactionServiceInterface;
+
+use App\Repositories\VehicleType\VehicleTypeRepository;
+use App\Repositories\VehicleType\VehicleTypeRepositoryInterface;
+use App\Service\VehicleType\VehicleTypeService;
+use App\Service\VehicleType\VehicleTypeServiceInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -49,26 +53,26 @@ class AppServiceProvider extends ServiceProvider
             UserService::class
         );
 
-        // Parking Slot
+        // Transaction
         $this->app->singleton(
-            ParkingSlotRepositoryInterface::class,
-            ParkingSlotRepository::class
+            TransactionRepositoryInterface::class,
+            TransactionRepository::class
         );
 
         $this->app->singleton(
-            ParkingSlotServiceInterface::class,
-            ParkingSlotService::class
+            TransactionServiceInterface::class,
+            TransactionService::class
         );
 
-        // Parking Ticket
+        // VehicleType
         $this->app->singleton(
-            ParkingTicketRepositoryInterface::class,
-            ParkingTicketRepository::class
+            VehicleTypeRepositoryInterface::class,
+            VehicleTypeRepository::class
         );
 
         $this->app->singleton(
-            ParkingTicketServiceInterface::class,
-            ParkingTicketService::class
+            VehicleTypeServiceInterface::class,
+            VehicleTypeService::class
         );
     }
 

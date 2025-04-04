@@ -13,15 +13,16 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('parking_ticket_id');
-            $table->decimal('amount', 10, 2);
-            $table->enum('status', ['pending', 'completed', 'failed'])->default('pending');
-            $table->timestamp('transaction_date')->useCurrent();
+            $table->unsignedBigInteger('vehicle_id'); // FK -> vehicles.mave
+            $table->unsignedBigInteger('user_id')->nullable(); // FK -> users (người xác nhận thanh toán)
+            $table->dateTime('thoigianra');
+            $table->decimal('sotien', 10, 2);
+            $table->string('hinhthucthanhtoan')->default('tiền mặt');
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
-            $table->foreign('parking_ticket_id')->references('id')->on('parking_tickets')->onDelete('cascade');
+        
+            // Khóa ngoại
+            $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -32,8 +33,5 @@ return new class extends Migration
     {
         Schema::dropIfExists('transactions');
         
-        Schema::table('parking_tickets', function (Blueprint $table) {
-            $table->dropColumn('amount'); // Xóa cột amount nếu rollback migration
-        });
     }
 };
