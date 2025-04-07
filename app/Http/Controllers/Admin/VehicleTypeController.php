@@ -31,6 +31,7 @@ class VehicleTypeController extends Controller
     public function create()
     {
         //
+        return view('admin.vehicletype.create');
     }
 
     /**
@@ -39,6 +40,9 @@ class VehicleTypeController extends Controller
     public function store(Request $request)
     {
         //
+        $data = $request->all();
+        $this->vehicleTypeService->create($data);
+        return redirect('admin/vehicletype');
     }
 
     /**
@@ -71,5 +75,7 @@ class VehicleTypeController extends Controller
     public function destroy(string $id)
     {
         //
+        $this->vehicleTypeService->delete($id);
+        return redirect('admin/vehicletype');
     }
 }

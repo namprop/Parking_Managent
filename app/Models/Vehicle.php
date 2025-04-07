@@ -20,5 +20,11 @@ class Vehicle extends Model
         return $this->hasMany(Transaction::class, 'vehicle_id', 'id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
+
     
 }

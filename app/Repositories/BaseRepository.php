@@ -43,4 +43,5 @@ abstract class BaseRepository implements RepositoryInterface
 
         return  $object->delete();
     }
+
 }

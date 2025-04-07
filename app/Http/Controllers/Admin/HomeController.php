@@ -26,10 +26,18 @@ class HomeController extends Controller
                 Auth::logout();
                 return back()->with('notification', 'Bạn không có quyền truy cập.');
             }
-            return "Success";
+            return redirect('/admin/vehicle');
         } else {
             return back()->with('notification', 'Error.');
         }
+    }
+
+    public function logout(){
+
+        Auth::logout();
+
+        return redirect('/admin/login');
+
     }
 
     

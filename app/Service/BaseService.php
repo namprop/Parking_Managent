@@ -37,5 +37,6 @@ class BaseService implements ServiceInterface{
         return $this->repository->delete($id);
 
     }
+
 }
 

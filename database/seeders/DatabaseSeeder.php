@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Carbon;
 
 class DatabaseSeeder extends Seeder
 {
@@ -44,6 +45,7 @@ class DatabaseSeeder extends Seeder
                 'password' => Hash::make('123456'),
                 'avatar' => null,
                 'level' => 2,
+                'account_code'=> 123,
             ],
         ]);
 
@@ -54,6 +56,7 @@ class DatabaseSeeder extends Seeder
                 'password' => Hash::make('123456'),
                 'avatar' => null,
                 'level' => 2,
+                'account_code'=> 124,
             ],
         ]);
 
@@ -94,19 +97,44 @@ class DatabaseSeeder extends Seeder
                 'vehicle_types_id' => '1',
                 'tennguoigui' => 'Nguyen Van A',
                 'bienso' => '',
-                'ngaygui' => '2024-04-03',
             ],
             [
                 'vehicle_types_id' => '2',
                 'tennguoigui' => 'Nguyen Van B',
                 'bienso' => '22C1-67894',
-                'ngaygui' => '2024-04-03',
+                
             ],
             [
                 'vehicle_types_id' => '3',
                 'tennguoigui' => 'Nguyen Van C',
                 'bienso' => '11H1-111111',
-                'ngaygui' => '2024-04-03',
+            ],
+        ]);
+
+        DB::table('transactions')->insert([
+            [
+                'vehicle_id' => 1,
+                'thoigianra' => Carbon::now()->subMinutes(30),
+                'sotien' => 10000,
+                'hinhthucthanhtoan' => 'tiền mặt',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'vehicle_id' => 2,
+                'thoigianra' => Carbon::now()->subMinutes(90),
+                'sotien' => 20000,
+                'hinhthucthanhtoan' => 'chuyển khoản',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'vehicle_id' => 3,
+                'thoigianra' => Carbon::now()->subMinutes(45),
+                'sotien' => 30000,
+                'hinhthucthanhtoan' => 'ví điện tử',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ]);
 

@@ -1,37 +1,51 @@
 @extends('admin.layout.master1')
 
-@section('title', 'user')
+@section('title', 'vehicle')
 
 
-@section('content')
+@section('body')
 
+<section id="users">
+    <h2 class="text-2xl font-semibold text-gray-700 mb-4">Danh sách người dùng</h2>
+    
+    <!-- Nút Thêm Người Dùng -->
+    <a href="/admin/user/create" class="inline-block bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700 mb-4">
+        + Thêm Người Dùng
+    </a>
 
-            <!-- Người dùng -->
-            <section id="users">
-                <h2>Danh sách người dùng</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Tên</th>
-                            <th>Email</th>
-                            <th>Level</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($users as $user)
-                        <tr>
-                            <td>{{$user->id}}</td>
-                            <td>{{$user->name}}</td>
-                            <td>{{$user->email}}</td>
-                            <td>{{$user->level}}</td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </section>
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
+            <thead class="bg-gray-800 text-white">
+                <tr>
+                    <th class="px-6 py-3 text-left">ID</th>
+                    <th class="px-6 py-3 text-left">Tên</th>
+                    <th class="px-6 py-3 text-left">Email</th>
+                    <th class="px-6 py-3 text-left">Level</th>
+                    <th class="px-6 py-3 text-left">Hành Động</th> <!-- Cột hành động -->
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($users as $user)
+                <tr class="border-t hover:bg-gray-100">
+                    <td class="px-6 py-4">{{ $user->id }}</td>
+                    <td class="px-6 py-4">{{ $user->name }}</td>
+                    <td class="px-6 py-4">{{ $user->email }}</td>
+                    <td class="px-6 py-4">{{ $user->level }}</td>
+                    <td class="px-6 py-4">
+                        <!-- Nút sửa và xóa -->
+                        <a href="" class="text-blue-600 hover:underline">Sửa</a> |
+                        <form action="/admin/user/{{$user->id}}" method="POST" class="inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-red-600 hover:underline">Xóa</button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 
-
+</section>
 
 @endsection

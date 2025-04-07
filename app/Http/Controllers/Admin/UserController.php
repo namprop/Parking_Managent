@@ -35,6 +35,9 @@ class UserController extends Controller
     public function create()
     {
         //
+        $users = $this->userService->all();
+
+        return view('admin.user.create',compact('users'));
     }
 
     /**
@@ -42,7 +45,20 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->get('password') != $request->get('passwor_confrimation')){
+            return back()->with('notification', 'Nhap lai password or Mã TK đã tồn tại');
+        }
+
+        if(User::where('account_code', $request->get('account_code'))->exists() ){
+            return back()->with('notification', 'Mã tài khoản đã tồn tại. Vui lòng nhập mã khác.');
+        }
+
+        
+        $data = $request->all();
+        $data['password'] = bcrypt($data['password']);
+        $this->userService->create($data);
+
+        return redirect('admin/user');
     }
 
     /**
@@ -75,5 +91,8 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+        $this->userService->delete($user->id);
+
+        return redirect('admin/user');
     }
 }

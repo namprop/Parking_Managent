@@ -12,4 +12,18 @@ class VehicleRepository extends BaseRepository implements VehicleRepositoryInter
     {
         return Vehicle::class;
     }
+
+    public function searchAndPaginate($searchBy, $keyword, $perPage = 5)
+    {
+        $query = $this->model->query();
+
+        $query->where(function ($query) use ($keyword) {
+            $query->where('tennguoigui', 'like', '%' . $keyword . '%')
+                ->orWhere('bienso', 'like', '%' . $keyword . '%');
+        });
+
+        return $query->orderBy('id', 'desc')
+            ->paginate($perPage)
+            ->appends(['search' => $keyword]);
+    }
 }

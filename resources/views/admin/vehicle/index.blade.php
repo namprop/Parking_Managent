@@ -1,75 +1,71 @@
 @extends('admin.layout.master1')
 
-@section('title', 'vehicle')
+@section('title', 'create')
 
 
-@section('content')
 
-        <!-- Main content -->
-        <div class="main-content">
-            <h1>Quản lý hệ thống đỗ xe</h1>
+@section('body')
+  
+  
+  <!-- Thêm Xe -->
+  <section class="mb-8" id="dashboard">
+    <a href="/admin/vehicle/create"
+        class="inline-block bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700 transition duration-200">
+        + Thêm Xe Vào
+    </a>
+</section>
 
-            <!-- Dashboard -->
-            <section id="dashboard">
+<!-- Danh sách phương tiện -->
+<section id="vehicles">
+    <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold text-gray-700">Danh sách phương tiện</h2>
+        <form method="GET" action="/admin/vehicle" class="flex space-x-2">
+            <input type="text" name="keyword" value="{{ $keyword ?? '' }}"
+                class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Tìm phương tiện...">
+            <button type="submit"
+                class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 transition duration-200">🔍</button>
+        </form>
+    </div>
 
-                <h2>Thêm xe mới</h2>
-                <form>
-                    <div class="form-group">
-                        <select name="vehicle_types_id" required>
-                            <option value="">-- Chọn loại phương tiện --</option>
-                            <option value="1">Xe máy</option>
-                            <option value="2">Ô tô</option>
-                            <option value="3">Xe đạp</option>
-                            <!-- Bạn có thể thêm các loại khác tùy ý -->
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="tennguoigui" placeholder="Ten Nguoi Gui" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="bienso" placeholder="Bien So" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="ngaygui" placeholder="Ngay gui" required>
-                    </div>
-                    <button type="submit">Thêm xe</button>
-                </form>
-            </section>
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
+            <thead class="bg-gray-800 text-white">
+                <tr>
+                    <th class="px-4 py-2">ID</th>
+                    <th class="px-4 py-2">Loại Phương Tiện</th>
+                    <th class="px-4 py-2">Nhận Dạng</th>
+                    <th class="px-4 py-2">Tên Người Gửi</th>
+                    <th class="px-4 py-2">Biển Số</th>
+                    <th class="px-4 py-2">Mã Xe</th>
+                    <th class="px-4 py-2">Ngày Gửi</th>
+                    <th class="px-4 py-2">Hành Động</th>
+                </tr>
+            </thead>
+            <tbody class="text-center text-gray-700">
+                @foreach ($vehicles as $vehicle)
+                <tr class="border-t hover:bg-gray-100">
+                    <td class="px-4 py-2">{{ $vehicle->id }}</td>
+                    <td class="px-4 py-2">{{ $vehicle->vehicleType->tenloaixe }}</td>
+                    <td class="px-4 py-2">{{ $vehicle->users_id ? 'Nhân viên' : 'Khách' }}</td>
+                    <td class="px-4 py-2">{{ $vehicle->tennguoigui }}</td>
+                    <td class="px-4 py-2">{{ $vehicle->bienso }}</td>
+                    <td class="px-4 py-2">{{ $vehicle->vehicleType->maloaixe }}</td>
+                    <td class="px-4 py-2">{{ $vehicle->ngaygui }}</td>
+                    <td class="px-4 py-2">
+                        <a href="{{ route('transaction.confirm', $vehicle->id) }}"
+                            class="text-blue-600 hover:underline font-medium">Thanh Toán</a>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 
-            <!-- Người dùng -->
-            <section id="users">
-                <h2>Danh sách người dùng</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Loai Phuong Tien</th>
-                            <th>Ten nguoi gui</th>
-                            <th>Bien So</th>
-                            <th>Ngay gui</th>
-                            <th>Hành Động</th>
-                        </tr>
-                    </thead>
+    <div class="mt-6">
+        {{ $vehicles->links() }}
+    </div>
+</section>
 
-                    <tbody>
-                        @foreach ($vehicles as $vehicle)
-                        <tr>
-                            <td>{{$vehicle->id}}</td>
-                            <td>{{$vehicle->vehicleType->tenloaixe}}</td>
-                            <td>{{$vehicle->tennguoigui}}</td>
-                            <td>{{$vehicle->bienso}}</td>
-                            <td>{{$vehicle->ngaygui}}</td>
-                            <td><a href="">Thanh Toan</a></td>
-                        </tr>
-                        @endforeach
-
-                    </tbody>
-                </table>
-            </section>
 
 @endsection
-
-
-
-
-
