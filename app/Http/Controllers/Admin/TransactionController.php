@@ -38,36 +38,45 @@ class TransactionController extends Controller
         $timeIn = Carbon::parse($vehicle->ngaygui);
         $timeOut = Carbon::now();
 
+
+        $hours = $timeIn->diffInHours($timeOut);
         $days = $timeIn->diffInDays($timeOut);
-        $days = max($days, 1); // ít nhất 1h
+        $days = ceil($hours / 24);
+        $days = max($days, 1);
+
 
         $rate = match ($vehicle->vehicleType->tenloaixe) {
             'Xe Dap' => 1000,
             'Xe May' => 3000,
             'O To' => 10000,
             default => 2000,
-
         };
 
         $tienmat = 'tiền mặt';
 
         $amount = $rate * $days;
 
-        return view('admin.transaction.confirm', compact('vehicle', 'amount', 'timeIn', 'timeOut', 'vehicleTypes', 'days', 'rate','tienmat'));
+        return view('admin.transaction.confirm', compact('vehicle', 'amount', 'timeIn', 'timeOut', 'vehicleTypes', 'days', 'rate', 'tienmat'));
     }
 
     public function pay(Request $request, $id)
-    {
-        $vehicle = $this->vehicleService->find($id);
+{
+    $vehicle = $this->vehicleService->find($id);
 
+    $data = [
+        'vehicle_id' => $vehicle->id,
+        'thoigianra' => $request->input('thoigianra'),
+        'sotien' => $request->input('sotien'),
+        'hinhthucthanhtoan' => $request->input('hinhthucthanhtoan'),
+    ];
 
-        $data = $request->all();
+    try {
         $this->transactionService->create($data);
-
-        $vehicle->delete();
-
-        dd($data);
-
+        $vehicle->delete(); 
         return redirect('admin/vehicle')->with('success', 'Xác nhận thành công!');
+    } catch (\Exception $e) {
+        return back()->with('error', 'Không thể tạo giao dịch: ' . $e->getMessage());
     }
+}
+
 }

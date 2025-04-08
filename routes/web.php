@@ -6,9 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/index',[\App\Http\Controllers\IndexController::class,'index']);
-
-
+Route::get('/index',[\App\Http\Controllers\UserController::class,'dashboard']);
 
 Route::prefix('/')->group(function (){
     Route::get('/',[AccountController::class,'login']);

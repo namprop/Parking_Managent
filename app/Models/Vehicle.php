@@ -8,7 +8,7 @@ class Vehicle extends Model
 {
     //
     protected $table = "vehicles";
-    protected $primaryKey = "id"; // Mã vé
+    protected $primaryKey = "id"; 
     protected $guarded = [];
 
     public function vehicleType()
