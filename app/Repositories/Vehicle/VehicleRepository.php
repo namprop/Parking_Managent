@@ -18,8 +18,8 @@ class VehicleRepository extends BaseRepository implements VehicleRepositoryInter
         $query = $this->model->query();
 
         $query->where(function ($query) use ($keyword) {
-            $query->where('tennguoigui', 'like', '%' . $keyword . '%')
-                ->orWhere('bienso', 'like', '%' . $keyword . '%');
+            $query->where('sender_name', 'like', '%' . $keyword . '%')
+                ->orWhere('license_plate', 'like', '%' . $keyword . '%');
         });
 
         return $query->orderBy('id', 'desc')

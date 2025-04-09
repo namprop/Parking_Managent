@@ -11,12 +11,14 @@ class AccountController extends Controller
 {
     //
 
-    public function login( ){
+    public function login()
+    {
 
         return view('front.account.login');
     }
 
-    public function checkLogin(Request $request){
+    public function checkLogin(Request $request)
+    {
         $credentials = [
             'email' => $request->input('email'),
             'password' => $request->input('password'),
@@ -35,9 +37,12 @@ class AccountController extends Controller
         } else {
             return back()->with('notification', 'Error.');
         }
-    
-        
     }
 
-    
+    public function logout()
+    {
+        Auth::logout();
+        
+        return redirect('/');
+    }
 }

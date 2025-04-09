@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Service\User\UserServiceInterface;
+use App\Utilities\ValidationRules;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -25,8 +27,7 @@ class UserController extends Controller
     {
         //
         $users = $this->userService->all();
-        return view('admin.user.index',compact('users'));
-       
+        return view('admin.user.index', compact('users'));
     }
 
     /**
@@ -37,7 +38,7 @@ class UserController extends Controller
         //
         $users = $this->userService->all();
 
-        return view('admin.user.create',compact('users'));
+        return view('admin.user.create', compact('users'));
     }
 
     /**
@@ -45,15 +46,17 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->get('password') != $request->get('passwor_confrimation')){
-            return back()->with('notification', 'Nhap lai password or Mã TK đã tồn tại');
+        $validator = Validator::make(
+            $request->all(),
+            ValidationRules::rules(),
+            ValidationRules::messages()
+        );
+    
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
         }
 
-        if(User::where('account_code', $request->get('account_code'))->exists() ){
-            return back()->with('notification', 'Mã tài khoản đã tồn tại. Vui lòng nhập mã khác.');
-        }
 
-        
         $data = $request->all();
         $data['password'] = bcrypt($data['password']);
         $this->userService->create($data);

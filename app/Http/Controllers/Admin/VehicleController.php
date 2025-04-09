@@ -26,12 +26,8 @@ class VehicleController extends Controller
     public function index(Request $request)
     {
         $vehicleTypes = $this->vehicleTypeService->all();
-
-
         $keyword = $request->input('keyword', '');
-
-
-        $vehicles = $this->vehicleService->searchAndPaginate('tennguoigui', $keyword);
+        $vehicles = $this->vehicleService->searchAndPaginate('sender_name', $keyword);
 
         return view('admin.vehicle.index', compact('vehicles', 'vehicleTypes', 'keyword',));
     }
@@ -65,7 +61,7 @@ class VehicleController extends Controller
     
             if ($user) {
                 $data['users_id'] = $user->id;
-                $data['tennguoigui'] = $user->name;
+                $data['sender_name'] = $user->name;
             } else {
                 $data['users_id'] = null;
             }

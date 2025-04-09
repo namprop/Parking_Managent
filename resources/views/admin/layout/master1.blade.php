@@ -18,7 +18,6 @@
                 <a href="/admin/user" class="block py-2 px-3 rounded hover:bg-gray-700 transition">User</a>
                 <a href="/admin/vehicle" class="block py-2 px-3 rounded hover:bg-gray-700 transition">Vehicle</a>
                 <a href="/admin/vehicletype" class="block py-2 px-3 rounded hover:bg-gray-700 transition">Vehicle Type</a>
-                <a href="#transactions" class="block py-2 px-3 rounded hover:bg-gray-700 transition">Transaction</a>
             </nav>
         </div>
 

@@ -85,9 +85,9 @@
     <h2>Xác Nhận Thanh Toán</h2>
 
     <table>
-      <tr><th>Tên người gửi:</th><td>{{$vehicle->tennguoigui}}</td></tr>
-      <tr><th>Loại xe:</th><td>{{$vehicle->vehicleType->tenloaixe}}</td></tr>
-      <tr><th>Biển số:</th><td>{{$vehicle->bienso}}</td></tr>
+      <tr><th>Tên người gửi:</th><td>{{$vehicle->sender_name}}</td></tr>
+      <tr><th>Loại xe:</th><td>{{$vehicle->vehicleType->vehicle_code}}</td></tr>
+      <tr><th>Biển số:</th><td>{{$vehicle->license_plate}}</td></tr>
       <tr><th>Ngày gửi:</th><td>{{$timeIn}}</td></tr>
       <tr><th>Thời gian ra:</th><td>{{$timeOut}}</td></tr>
       <tr><th>Số ngay:</th><td>{{$days}}</td></tr>
@@ -96,14 +96,14 @@
     </table>
 
     <div class="buttons">
-      <a href="danh-sach.html" class="btn btn-cancel">Hủy</a>
+      <a href="/admin/vehicle" class="btn btn-cancel">Hủy</a>
 
       <form action="{{ route('transaction.pay', $vehicle->id) }}" method="POST">
         @csrf
         <input type="hidden" name="vehicle_id" value="{{$vehicle->id}}">
-        <input type="hidden" name="thoigianra" value="{{$timeOut}}">
-        <input type="hidden" name="sotien" value="{{$amount}}">
-        <input type="hidden" name="hinhthucthanhtoan" value="{{$tienmat}}">
+        <input type="hidden" name="check_out" value="{{$timeOut}}">
+        <input type="hidden" name="price" value="{{$amount}}">
+        <input type="hidden" name="payment_method" value="{{$tienmat}}">
         <button type="submit" class="btn btn-confirm">Xác Nhận Thanh Toán</button>
       </form>
 

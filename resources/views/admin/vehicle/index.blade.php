@@ -46,12 +46,12 @@
                 @foreach ($vehicles as $vehicle)
                 <tr class="border-t hover:bg-gray-100">
                     <td class="px-4 py-2">{{ $vehicle->id }}</td>
-                    <td class="px-4 py-2">{{ $vehicle->vehicleType->tenloaixe }}</td>
+                    <td class="px-4 py-2">{{ $vehicle->vehicleType->vehicle_name }}</td>
                     <td class="px-4 py-2">{{ $vehicle->users_id ? 'Nhân viên' : 'Khách' }}</td>
-                    <td class="px-4 py-2">{{ $vehicle->tennguoigui }}</td>
-                    <td class="px-4 py-2">{{ $vehicle->bienso }}</td>
-                    <td class="px-4 py-2">{{ $vehicle->vehicleType->maloaixe }}</td>
-                    <td class="px-4 py-2">{{ $vehicle->ngaygui }}</td>
+                    <td class="px-4 py-2">{{ $vehicle->sender_name }}</td>
+                    <td class="px-4 py-2">{{ $vehicle->license_plate }}</td>
+                    <td class="px-4 py-2">{{ $vehicle->vehicleType->vehicle_code }}</td>
+                    <td class="px-4 py-2">{{ $vehicle->check_in }}</td>
                     <td class="px-4 py-2">
                         <a href="{{ route('transaction.confirm', $vehicle->id) }}"
                             class="text-blue-600 hover:underline font-medium">Thanh Toán</a>

@@ -67,27 +67,28 @@ class DatabaseSeeder extends Seeder
                 'password' => Hash::make('123456'),
                 'avatar' => null,
                 'level' => 2,
+                'account_code'=> 125,
             ],
         ]);
 
         DB::table('vehicle_types')->insert([
             [
-                'maloaixe' => 'XD',
-                'tenloaixe' => 'Xe Dap',
+                'vehicle_code' => 'XD',
+                'vehicle_name' => 'Xe Dap',
 
             ],
         ]);
         DB::table('vehicle_types')->insert([
             [
-                'maloaixe' => 'XM',
-                'tenloaixe' => 'Xe May',
+                'vehicle_code' => 'XM',
+                'vehicle_name' => 'Xe May',
 
             ],
         ]);
         DB::table('vehicle_types')->insert([
             [
-                'maloaixe' => 'OT',
-                'tenloaixe' => 'O To',
+                'vehicle_code' => 'OT',
+                'vehicle_name' => 'O To',
 
             ],
         ]);
@@ -95,44 +96,44 @@ class DatabaseSeeder extends Seeder
         DB::table('vehicles')->insert([
             [
                 'vehicle_types_id' => '1',
-                'tennguoigui' => 'Nguyen Van A',
-                'bienso' => '',
+                'sender_name' => 'Nguyen Van A',
+                'license_plate' => '',
             ],
             [
                 'vehicle_types_id' => '2',
-                'tennguoigui' => 'Nguyen Van B',
-                'bienso' => '22C1-67894',
+                'sender_name' => 'Nguyen Van B',
+                'license_plate' => '22C1-67894',
                 
             ],
             [
                 'vehicle_types_id' => '3',
-                'tennguoigui' => 'Nguyen Van C',
-                'bienso' => '11H1-111111',
+                'sender_name' => 'Nguyen Van C',
+                'lincense' => '11H1-111111',
             ],
         ]);
 
         DB::table('transactions')->insert([
             [
                 'vehicle_id' => 1,
-                'thoigianra' => Carbon::now()->subMinutes(30),
-                'sotien' => 10000,
-                'hinhthucthanhtoan' => 'tiền mặt',
+                'check_out' => Carbon::now()->subMinutes(30),
+                'price' => 10000,
+                'payment_method' => 'tiền mặt',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'vehicle_id' => 2,
-                'thoigianra' => Carbon::now()->subMinutes(90),
-                'sotien' => 20000,
-                'hinhthucthanhtoan' => 'chuyển khoản',
+                'check_out' => Carbon::now()->subMinutes(90),
+                'price' => 20000,
+                'payment_method' => 'tiền mặt',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'vehicle_id' => 3,
-                'thoigianra' => Carbon::now()->subMinutes(45),
-                'sotien' => 30000,
-                'hinhthucthanhtoan' => 'ví điện tử',
+                'check_out' => Carbon::now()->subMinutes(45),
+                'price' => 30000,
+                'payment_method' => 'tiền mặt',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

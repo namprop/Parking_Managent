@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('vehicle_id'); // FK -> vehicles.mave
-            $table->dateTime('thoigianra');
-            $table->decimal('sotien', 10, 2);
-            $table->string('hinhthucthanhtoan')->default('tiền mặt');
+            $table->unsignedBigInteger('vehicle_id'); 
+            $table->dateTime('check_out');
+            $table->decimal('price', 10, 2);
+            $table->string('payment_method')->default('tiền mặt');
             $table->timestamps();
         
             // Khóa ngoại

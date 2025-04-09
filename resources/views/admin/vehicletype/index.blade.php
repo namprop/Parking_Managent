@@ -23,8 +23,8 @@
                             @foreach ($vehicleTypes as $vehicleType)
                                 <tr class="border-t hover:bg-gray-100">
                                     <td class="px-6 py-4">{{ $vehicleType->id }}</td>
-                                    <td class="px-6 py-4">{{ $vehicleType->maloaixe }}</td>
-                                    <td class="px-6 py-4">{{ $vehicleType->tenloaixe }}</td>
+                                    <td class="px-6 py-4">{{ $vehicleType->vehicle_code }}</td>
+                                    <td class="px-6 py-4">{{ $vehicleType->vehicle_name }}</td>
                                     <td class="px-6 py-4">
                                         <!-- Nút sửa và xóa -->
                                         <form action="/admin/vehicletype/{{$vehicleType->id}}" method="POST" class="inline" onsubmit="return confirm('Bạn có chắc chắn muốn xóa?')">

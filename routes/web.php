@@ -11,8 +11,8 @@ Route::get('/index',[\App\Http\Controllers\UserController::class,'dashboard']);
 Route::prefix('/')->group(function (){
     Route::get('/',[AccountController::class,'login']);
     Route::post('/',[AccountController::class,'checkLogin']);
+    Route::post('/logout', [AccountController::class, 'logout'])->name('logoutaccount');
 });
-
 
 
 Route::prefix('admin')->middleware('admin.login')->group(function () {

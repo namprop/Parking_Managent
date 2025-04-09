@@ -16,9 +16,9 @@ return new class extends Migration
             $table->id(); 
             $table->unsignedBigInteger('vehicle_types_id');
             $table->unsignedBigInteger('users_id')->nullable(); 
-            $table->string('tennguoigui')->nullable(); 
-            $table->string('bienso')->unique(); // Biển số xe
-            $table->date('ngaygui')->default(DB::raw('CURRENT_DATE'))->nullable(false);
+            $table->string('sender_name')->nullable(); 
+            $table->string('license_plate')->nullable(); // Biển số xe
+            $table->timestamp('check_in')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamps();
             // Foreign key constraints
             $table->foreign('vehicle_types_id')->references('id')->on('vehicle_types')->onDelete('cascade');

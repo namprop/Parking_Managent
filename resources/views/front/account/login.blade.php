@@ -44,7 +44,7 @@
 </head>
 <body>
     <div class="login-container">
-        <h2>Đăng Nhập</h2>
+        <h2>Đăng Nhập User</h2>
         @if(session('notification'))
         {{session('notification')}}
         @endif

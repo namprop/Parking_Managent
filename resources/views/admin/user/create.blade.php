@@ -16,13 +16,15 @@
 
                 <h2 class="text-2xl font-bold text-center">Tạo tài khoản</h2>
 
-                @if (session('notification'))
-                    <div class="alert alert-danger">
-                        {{ session('notification') }}
+                @if ($errors->any())
+                    <div class="bg-red-100 text-red-700 p-4 rounded-lg mb-4">
+                        <ul class="list-disc pl-5">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
                     </div>
                 @endif
-
-
 
                 <div>
                     <label for="name" class="block text-sm font-medium text-gray-700">Họ và tên</label>
@@ -41,7 +43,7 @@
                     <select id="level" name="level" required
                         class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
                         <option value="0">Admin</option>
-                        <option value="2" selected>Nhân viên</option> <!-- Đảm bảo giá trị mặc định là "Nhân viên" -->
+                        <option value="2" selected>Nhân viên</option> 
                     </select>
                 </div>
 

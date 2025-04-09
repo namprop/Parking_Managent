@@ -28,13 +28,9 @@ class UserController extends Controller
         $vehicles = Vehicle::with('user')
             ->where('users_id', $userId)
             ->get();
-
         if ($vehicles->isNotEmpty()) {
             return view('front/parking/index', compact('user', 'vehicles'));
         }
-
-
         return back()->with('notification', 'Xe của bạn hiện không còn trong bãi');
-
     }
 }

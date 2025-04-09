@@ -35,7 +35,7 @@ class TransactionController extends Controller
         $vehicle = $this->vehicleService->find($id);
         $vehicleTypes = $this->vehicleTypeService->all();
 
-        $timeIn = Carbon::parse($vehicle->ngaygui);
+        $timeIn = Carbon::parse($vehicle->check_in);
         $timeOut = Carbon::now();
 
 
@@ -45,7 +45,7 @@ class TransactionController extends Controller
         $days = max($days, 1);
 
 
-        $rate = match ($vehicle->vehicleType->tenloaixe) {
+        $rate = match ($vehicle->vehicleType->vehicle_name) {
             'Xe Dap' => 1000,
             'Xe May' => 3000,
             'O To' => 10000,
@@ -53,30 +53,18 @@ class TransactionController extends Controller
         };
 
         $tienmat = 'tiền mặt';
-
         $amount = $rate * $days;
 
         return view('admin.transaction.confirm', compact('vehicle', 'amount', 'timeIn', 'timeOut', 'vehicleTypes', 'days', 'rate', 'tienmat'));
     }
 
     public function pay(Request $request, $id)
-{
-    $vehicle = $this->vehicleService->find($id);
+    {
+        $vehicle = $this->vehicleService->find($id);
 
-    $data = [
-        'vehicle_id' => $vehicle->id,
-        'thoigianra' => $request->input('thoigianra'),
-        'sotien' => $request->input('sotien'),
-        'hinhthucthanhtoan' => $request->input('hinhthucthanhtoan'),
-    ];
-
-    try {
+        $data = $request->all();
         $this->transactionService->create($data);
-        $vehicle->delete(); 
-        return redirect('admin/vehicle')->with('success', 'Xác nhận thành công!');
-    } catch (\Exception $e) {
-        return back()->with('error', 'Không thể tạo giao dịch: ' . $e->getMessage());
+        $vehicle->delete();
+        return redirect('admin/vehicle');
     }
-}
-
 }

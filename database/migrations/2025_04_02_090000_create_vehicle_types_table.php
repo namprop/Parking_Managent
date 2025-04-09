@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('vehicle_types', function (Blueprint $table) {
             $table->id();
-            $table->string('maloaixe')->unique(); // Mã loại xe (OT, XM, v.v.)
-            $table->string('tenloaixe'); // Tên loại xe (Ô tô, xe máy, v.v.)
+            $table->string('vehicle_code')->unique();
+            $table->string('vehicle_name'); 
             $table->timestamps();
         });
 
