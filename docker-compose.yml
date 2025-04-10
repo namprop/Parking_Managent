@@ -30,9 +30,10 @@ services:
   db:
     image: mysql:8
     container_name: mysql_parking
+    platform: linux/x86_64
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ALLOW_EMPTY_PASSWORD : 'yes'
       MYSQL_DATABASE: parking_managent
     ports:
       - "3306:3306"
