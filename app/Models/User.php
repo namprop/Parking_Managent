@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'level',
+        'account_code',
     ];
 
     /**
@@ -50,8 +52,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Vehicle::class);
     }
-
-    
-
-    
 }

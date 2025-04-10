@@ -42,6 +42,7 @@
                                 @endif
                             </td>
                             <td class="px-6 py-4">
+                                <a href="/admin/user/{{$user->id}}/edit" class="text-blue-600 hover:underline mr-2">Sửa</a>
                                 <!-- Nút xóa -->
                                 <form action="/admin/user/{{ $user->id }}" method="POST" class="inline">
                                     @csrf

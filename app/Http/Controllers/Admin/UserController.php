@@ -36,6 +36,7 @@ class UserController extends Controller
     public function create()
     {
         //
+
         $users = $this->userService->all();
 
         return view('admin.user.create', compact('users'));
@@ -59,6 +60,7 @@ class UserController extends Controller
 
         $data = $request->all();
         $data['password'] = bcrypt($data['password']);
+
         $this->userService->create($data);
 
         return redirect('admin/user');
@@ -75,17 +77,23 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit($id)
     {
         //
+        $user = $this->userService->find($id);
+
+        return view('admin.user.edit',compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
         //
+        $data = $request->all();
+        $this->userService->update($data,$id);
+        return redirect('admin/user');
     }
 
     /**
