@@ -63,6 +63,7 @@ class TransactionController extends Controller
         $vehicle = $this->vehicleService->find($id);
 
         $data = $request->all();
+        $data['check_out'] = Carbon::now();
         $this->transactionService->create($data);
         $vehicle->delete();
         return redirect('admin/vehicle');
