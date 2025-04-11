@@ -43,7 +43,8 @@
                     <select id="level" name="level" required
                         class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
                         <option value="0">Admin</option>
-                        <option value="2" selected>Nhân viên</option> 
+                        <option value="1" selected>Employee</option> 
+                        <option value="2" selected>Client</option> 
                     </select>
                 </div>
 

@@ -14,7 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         //
             $middleware->alias([
                 'admin.login' => \App\Http\Middleware\CheckAdminLogin::class,
-                'host.login' => \App\Http\Middleware\CheckHostLogin::class
+                'employee.login' => \App\Http\Middleware\CheckHostLogin::class
             ]);
 
             

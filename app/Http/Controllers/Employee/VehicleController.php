@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Host;
+namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -30,7 +30,7 @@ class VehicleController extends Controller
         $vehicleTypes = $this->vehicleTypeService->all();
         $keyword = $request->input('keyword', '');
         $vehicles = $this->vehicleService->searchAndPaginate('sender_name',$keyword);
-        return view('host.vehicle.index',compact('vehicles','vehicleTypes','keyword'));
+        return view('Employee.vehicle.index',compact('vehicles','vehicleTypes','keyword'));
     }
 
     /**
@@ -42,7 +42,7 @@ class VehicleController extends Controller
         $vehicleTypes = $this->vehicleTypeService->all();
         $vehicles = $this->vehicleService->all();
         $users = User::whereNotNull('account_code')->get();
-        return view('host.vehicle.create', compact('vehicles', 'vehicleTypes', 'users'));
+        return view('employee.vehicle.create', compact('vehicles', 'vehicleTypes', 'users'));
     }
 
     /**
@@ -70,7 +70,7 @@ class VehicleController extends Controller
         unset($data['account_code']);
         $this->vehicleService->create($data);
     
-        return redirect('host/vehicle')->with('success', 'Thêm xe thành công');
+        return redirect('employee/vehicle')->with('success', 'Thêm xe thành công');
     }
 
     /**
@@ -81,7 +81,7 @@ class VehicleController extends Controller
         //
         $vehicle = $this->vehicleService->find($id);
         $vehicleTypes = $this->vehicleTypeService->all();
-        return view('host.vehicle.show', compact('vehicle', 'vehicleTypes'));
+        return view('employee.vehicle.show', compact('vehicle', 'vehicleTypes'));
     }
 
     /**

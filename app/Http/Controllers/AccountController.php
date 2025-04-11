@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Service\User\UserServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +30,7 @@ class AccountController extends Controller
         $remember = $request->has('remember');
 
         if (Auth::attempt($credentials, $remember)) {
-            if (!in_array(Auth::user()->level, [Constant::user_level_client])) {
+            if (!in_array(Auth::user()->level, [Constant::user_level_employee])) {
                 Auth::logout();
                 return back()->with('notification', 'Bạn không có quyền truy cập.');
             }

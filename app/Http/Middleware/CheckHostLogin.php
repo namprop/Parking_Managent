@@ -13,12 +13,12 @@ class CheckHostLogin
     public function handle(Request $request, Closure $next)
     {
         if (Auth::guest()) {
-            return redirect()->guest('host/login');
+            return redirect()->guest('employee/login');
         }
 
-        if (Auth::user()->level != Constant::user_level_host) {
+        if (Auth::user()->level != Constant::user_level_employee) {
             Auth::logout();
-            return redirect()->guest('host/login');
+            return redirect()->guest('employee/login');
         }
 
         return $next($request);

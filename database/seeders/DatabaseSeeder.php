@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'name' => 'Nhan Vien 1',
-                'email' => 'host1@gmail.com',
+                'email' => 'employee@gmail.com',
                 'password' => Hash::make('123456'),
                 'avatar' => null,
                 'level' => 1,
@@ -41,34 +41,13 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'name' => 'Nhan Vien 2',
-                'email' => 'host2@gmail.com',
+                'email' => 'employee1@gmail.com',
                 'password' => Hash::make('123456'),
                 'avatar' => null,
                 'level' => 1,
             ],
         ]);
 
-        DB::table('users')->insert([
-            [
-                'name' => 'user1',
-                'email' => 'user1@gmail.com',
-                'password' => Hash::make('123456'),
-                'avatar' => null,
-                'level' => 2,
-                'account_code'=> 124,
-            ],
-        ]);
-
-        DB::table('users')->insert([
-            [
-                'name' => 'user2',
-                'email' => 'user2@gmail.com',
-                'password' => Hash::make('123456'),
-                'avatar' => null,
-                'level' => 2,
-                'account_code'=> 125,
-            ],
-        ]);
 
         DB::table('vehicle_types')->insert([
             [

@@ -33,8 +33,11 @@ services:
     platform: linux/x86_64
     restart: always
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD : 'yes'
-      MYSQL_DATABASE: parking_managent
+        MYSQL_DATABASE: ${DB_DATABASE}
+        MYSQL_USER: ${DB_USERNAME}
+        MYSQL_ALLOW_EMPTY_PASSWORD: 'YES'
+        SERVICE_TAGS: dev
+        SERVICE_NAME: mysql
     ports:
       - "3306:3306"
     networks:

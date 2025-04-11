@@ -15,26 +15,27 @@ class HomeController extends Controller
         return view('admin.login');
     }
     public function postLogin(Request $request)
-    {
-        $credentials = [
-            'email' => $request->input('email'),
-            'password' => $request->input('password'),
-        ];
+{
+    $credentials = $request->only('email', 'password');
+    $remember = $request->has('remember');
 
-        $remember = $request->has('remember');
-
-
-        if (Auth::attempt($credentials, $remember)) {
-            if (!in_array(Auth::user()->level, [Constant::user_level_admin])) {
-                Auth::logout();
-                return back()->with('notification', 'Bạn không có quyền truy cập.');
-            } 
-           return redirect()->intended('admin');
-           
+    if (Auth::attempt($credentials, $remember)) {
+        $user = Auth::user();
+        
+        if (!in_array($user->level, [Constant::user_level_admin, Constant::user_level_employee])) {
+            Auth::logout();
+            return back()->with('notification', 'Bạn không có quyền truy cập.');
+        }
+        if ($user->level === Constant::user_level_admin) {
+            return redirect()->intended('admin/vehicle');
         } else {
-            return back()->with('notification', 'Tài khoản mật khẩu không chính xác');
+            return redirect()->intended('employee/vehicle');
         }
     }
+
+    return back()->with('notification', 'Tài khoản hoặc mật khẩu không chính xác');
+}
+
 
     public function logout()
     {
@@ -44,6 +45,3 @@ class HomeController extends Controller
         return redirect('/admin/login');
     }
 }
-
-
-

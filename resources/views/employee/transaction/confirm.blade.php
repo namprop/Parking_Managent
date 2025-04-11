@@ -96,7 +96,7 @@
     </table>
 
     <div class="buttons">
-      <a href="/host/vehicle" class="btn btn-cancel">Hủy</a>
+      <a href="/employee/vehicle" class="btn btn-cancel">Hủy</a>
 
       <form action="{{ route('transaction.pay', $vehicle->id) }}" method="POST">
         @csrf

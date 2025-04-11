@@ -36,7 +36,7 @@
                                 @if ($user->level == 0)
                                     Admin
                                 @elseif($user->level == 1)
-                                    Host
+                                    Employee
                                 @elseif($user->level == 2)
                                     Client
                                 @endif

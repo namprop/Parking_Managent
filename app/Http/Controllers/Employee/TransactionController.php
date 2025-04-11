@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Host;
+namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -30,7 +30,7 @@ class TransactionController extends Controller
 
         $transactions = $this->transactionService->all();
 
-        return view('host.transaction.index',compact('transactions'));
+        return view('employee.transaction.index',compact('transactions'));
 
     }
 
@@ -63,7 +63,7 @@ class TransactionController extends Controller
         $tienmat = 'tiền mặt';
         $amount = $rate * $days;
 
-        return view('host.transaction.confirm', compact('vehicle', 'amount', 'timeIn', 'timeOut', 'vehicleTypes', 'days', 'rate', 'tienmat'));
+        return view('employee.transaction.confirm', compact('vehicle', 'amount', 'timeIn', 'timeOut', 'vehicleTypes', 'days', 'rate', 'tienmat'));
     }
 
     public function pay(Request $request, $id)
@@ -73,7 +73,7 @@ class TransactionController extends Controller
         $data = $request->all();
         $this->transactionService->create($data);
         $vehicle->delete();
-        return redirect('host/vehicle');
+        return redirect('employee/vehicle');
     }
 
 }

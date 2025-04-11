@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use App\Utilities\Constant;
+use Closure;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
+
+class CheckEmployeeLogin
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     */
+    public function handle(Request $request, Closure $next): Response
+    {
+       
+        if (!Auth::check() || Auth::user()->level !== Constant::user_level_employee) {
+            return redirect('/'); 
+        }
+
+        return $next($request);
+    
+    }
+}

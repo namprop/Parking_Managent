@@ -1,4 +1,4 @@
-@extends('host.layout.hostmaster')
+@extends('employee.layout.employeemaster')
 
 @section('title', 'vehicle')
 
@@ -8,7 +8,7 @@
 
 
 <section class="mb-8" id="dashboard">
-    <a href="/host/vehicle/create"
+    <a href="/employee/vehicle/create"
         class="inline-block bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700 transition duration-200">
         + Thêm Xe Vào
     </a>
@@ -18,7 +18,7 @@
 <section id="vehicles">
     <div class="flex justify-between items-center mb-4">
         <h2 class="text-xl font-semibold text-gray-700">Danh sách phương tiện</h2>
-        <form method="GET" action="/host/vehicle" class="flex space-x-2">
+        <form method="GET" action="/employee/vehicle" class="flex space-x-2">
             <input type="text" name="keyword" value="{{ $keyword ?? '' }}"
                 class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Tìm phương tiện...">

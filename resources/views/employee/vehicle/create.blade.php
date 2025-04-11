@@ -1,4 +1,4 @@
-@extends('host.layout.hostmaster')
+@extends('employee.layout.employeemaster')
 
 @section('title', 'vehicle')
 
@@ -6,7 +6,7 @@
 
 <section id="dashboard">
     <h2 class="text-2xl font-semibold text-gray-700 mb-4">Thêm xe mới</h2>
-    <form action="/host/vehicle" method="POST" class="space-y-4">
+    <form action="/employee/vehicle" method="POST" class="space-y-4">
         @csrf
         <div class="form-group">
             <label for="vehicle_types_id" class="block text-gray-600">Chọn loại xe:</label>

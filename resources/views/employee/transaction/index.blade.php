@@ -1,4 +1,4 @@
-@extends('host.layout.hostmaster')
+@extends('employee.layout.employeemaster')
 
 @section('title', 'Transaction')
 
