@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Host;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Service\Vehicle\VehicleServiceInterface;
 use App\Service\VehicleType\VehicleTypeServiceInterface;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class VehicleController extends Controller
@@ -14,27 +14,24 @@ class VehicleController extends Controller
      * Display a listing of the resource.
      */
 
-    protected $vehicleService;
-    protected $vehicleTypeService;
+  
+     protected $vehicleService;
+     protected $vehicleTypeService;
 
-    public function __construct(VehicleServiceInterface $vehicleService, VehicleTypeServiceInterface $vehicleTypeService)
-    {
-        $this->vehicleTypeService = $vehicleTypeService;
+     public function __construct(VehicleServiceInterface $vehicleService, VehicleTypeServiceInterface $vehicleTypeService){
         $this->vehicleService = $vehicleService;
-    }
+        $this->vehicleTypeService = $vehicleTypeService;
+
+     }
 
     public function index(Request $request)
     {
+        //
         $vehicleTypes = $this->vehicleTypeService->all();
         $keyword = $request->input('keyword', '');
-        $vehicles = $this->vehicleService->searchAndPaginate('sender_name', $keyword);
-
-        return view('admin.vehicle.index', compact('vehicles', 'vehicleTypes', 'keyword',));
+        $vehicles = $this->vehicleService->searchAndPaginate('sender_name',$keyword);
+        return view('host.vehicle.index',compact('vehicles','vehicleTypes','keyword'));
     }
-
-
-
-
 
     /**
      * Show the form for creating a new resource.
@@ -45,7 +42,7 @@ class VehicleController extends Controller
         $vehicleTypes = $this->vehicleTypeService->all();
         $vehicles = $this->vehicleService->all();
         $users = User::whereNotNull('account_code')->get();
-        return view('admin.vehicle.create', compact('vehicles', 'vehicleTypes', 'users'));
+        return view('host.vehicle.create', compact('vehicles', 'vehicleTypes', 'users'));
     }
 
     /**
@@ -53,6 +50,7 @@ class VehicleController extends Controller
      */
     public function store(Request $request)
     {
+        //
         $data = $request->all();
     
         if ($request->filled('account_code')) {
@@ -66,15 +64,14 @@ class VehicleController extends Controller
                 $data['users_id'] = null;
             }
         } else {
-
             $data['users_id'] = null;
         }
+        
         unset($data['account_code']);
         $this->vehicleService->create($data);
     
-        return redirect('admin/vehicle')->with('success', 'Thêm xe thành công');
+        return redirect('host/vehicle')->with('success', 'Thêm xe thành công');
     }
-    
 
     /**
      * Display the specified resource.
@@ -84,7 +81,7 @@ class VehicleController extends Controller
         //
         $vehicle = $this->vehicleService->find($id);
         $vehicleTypes = $this->vehicleTypeService->all();
-        return view('admin.vehicle.show', compact('vehicle', 'vehicleTypes'));
+        return view('host.vehicle.show', compact('vehicle', 'vehicleTypes'));
     }
 
     /**
@@ -101,8 +98,6 @@ class VehicleController extends Controller
     public function update(Request $request, string $id)
     {
         //
-
-
     }
 
     /**

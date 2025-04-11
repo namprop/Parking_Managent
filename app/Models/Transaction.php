@@ -16,5 +16,10 @@ class Transaction extends Model
         return $this->belongsTo(Vehicle::class, 'vehicle_id', 'id');
     }
 
+    protected $fillable = [
+        'sender', 'vehicle_name', 'license_plate', 'check_in', 'check_out', 'price',
+        'payment_method', 'employee_name' 
+    ];
+
 
 }

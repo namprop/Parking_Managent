@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Host;
 
 use App\Http\Controllers\Controller;
+use App\Utilities\Constant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Utilities\Constant;
 
-class HomeController extends Controller
+class AccountController extends Controller
 {
     //
     public function getLogin()
     {
-        return view('admin.login');
+        return view('host.account.login');
     }
     public function postLogin(Request $request)
     {
@@ -25,12 +25,11 @@ class HomeController extends Controller
 
 
         if (Auth::attempt($credentials, $remember)) {
-            if (!in_array(Auth::user()->level, [Constant::user_level_admin])) {
+            if (!in_array(Auth::user()->level, [Constant::user_level_host])) {
                 Auth::logout();
                 return back()->with('notification', 'Bạn không có quyền truy cập.');
-            } 
-           return redirect()->intended('admin');
-           
+            }
+            return redirect('host/vehicle');
         } else {
             return back()->with('notification', 'Tài khoản mật khẩu không chính xác');
         }
@@ -41,9 +40,6 @@ class HomeController extends Controller
 
         Auth::logout();
 
-        return redirect('/admin/login');
+        return redirect('/host/login');
     }
 }
-
-
-

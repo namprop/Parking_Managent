@@ -38,7 +38,7 @@
                                 @elseif($user->level == 1)
                                     Host
                                 @elseif($user->level == 2)
-                                    Nhân Viên
+                                    Client
                                 @endif
                             </td>
                             <td class="px-6 py-4">

@@ -1,15 +1,14 @@
-@extends('admin.layout.master1')
+@extends('host.layout.hostmaster')
 
-@section('title', 'create')
-
+@section('title', 'vehicle')
 
 
 @section('body')
-  
-  
-  <!-- Thêm Xe -->
-  <section class="mb-8" id="dashboard">
-    <a href="/admin/vehicle/create"
+
+
+
+<section class="mb-8" id="dashboard">
+    <a href="/host/vehicle/create"
         class="inline-block bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700 transition duration-200">
         + Thêm Xe Vào
     </a>
@@ -19,7 +18,7 @@
 <section id="vehicles">
     <div class="flex justify-between items-center mb-4">
         <h2 class="text-xl font-semibold text-gray-700">Danh sách phương tiện</h2>
-        <form method="GET" action="/admin/vehicle" class="flex space-x-2">
+        <form method="GET" action="/host/vehicle" class="flex space-x-2">
             <input type="text" name="keyword" value="{{ $keyword ?? '' }}"
                 class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Tìm phương tiện...">
@@ -47,13 +46,13 @@
                 <tr class="border-t hover:bg-gray-100">
                     <td class="px-4 py-2">{{ $vehicle->id }}</td>
                     <td class="px-4 py-2">{{ $vehicle->vehicleType->vehicle_name }}</td>
-                    <td class="px-4 py-2">{{ $vehicle->users_id ? 'Nhân viên' : 'Khách' }}</td>
+                    <td class="px-4 py-2">{{ $vehicle->users_id ? 'Khách' : 'Khách Lạ' }}</td>
                     <td class="px-4 py-2">{{ $vehicle->sender_name }}</td>
                     <td class="px-4 py-2">{{ $vehicle->license_plate }}</td>
                     <td class="px-4 py-2">{{ $vehicle->vehicleType->vehicle_code }}</td>
                     <td class="px-4 py-2">{{ $vehicle->check_in }}</td>
                     <td class="px-4 py-2">
-                        <a href="{{ route('atransaction.confirm', $vehicle->id) }}"
+                        <a href="{{ route('transaction.confirm', $vehicle->id) }}"
                             class="text-blue-600 hover:underline font-medium">Thanh Toán</a>
                     </td>
                 </tr>
@@ -66,6 +65,5 @@
         {{ $vehicles->links() }}
     </div>
 </section>
-
 
 @endsection

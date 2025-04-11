@@ -15,10 +15,8 @@
         <div class="w-64 bg-gray-800 text-white flex flex-col p-6">
             <h2 class="text-2xl font-bold mb-6">🚗 Parking System</h2>
             <nav class="space-y-4">
-                <a href="/admin/user" class="block py-2 px-3 rounded hover:bg-gray-700 transition">User</a>
-                <a href="/admin/vehicle" class="block py-2 px-3 rounded hover:bg-gray-700 transition">Vehicle</a>
-                <a href="/admin/vehicletype" class="block py-2 px-3 rounded hover:bg-gray-700 transition">Vehicle Type</a>
-                <a href="/admin/transaction" class="block py-2 px-3 rounded hover:bg-gray-700 transition">Transaction</a>
+                <a href="/host/vehicle" class="block py-2 px-3 rounded hover:bg-gray-700 transition">Vehicle</a>
+                <a href="/host/transaction" class="block py-2 px-3 rounded hover:bg-gray-700 transition">Transaction</a>
             </nav>
         </div>
 

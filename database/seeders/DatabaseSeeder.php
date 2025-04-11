@@ -30,8 +30,8 @@ class DatabaseSeeder extends Seeder
 
         DB::table('users')->insert([
             [
-                'name' => 'admin1',
-                'email' => 'admin1@gmail.com',
+                'name' => 'Nhan Vien 1',
+                'email' => 'host1@gmail.com',
                 'password' => Hash::make('123456'),
                 'avatar' => null,
                 'level' => 1,
@@ -40,12 +40,11 @@ class DatabaseSeeder extends Seeder
 
         DB::table('users')->insert([
             [
-                'name' => 'user',
-                'email' => 'user@gmail.com',
+                'name' => 'Nhan Vien 2',
+                'email' => 'host2@gmail.com',
                 'password' => Hash::make('123456'),
                 'avatar' => null,
-                'level' => 2,
-                'account_code'=> 123,
+                'level' => 1,
             ],
         ]);
 
@@ -112,33 +111,7 @@ class DatabaseSeeder extends Seeder
             ],
         ]);
 
-        DB::table('transactions')->insert([
-            [
-                'vehicle_id' => 1,
-                'check_out' => Carbon::now()->subMinutes(30),
-                'price' => 10000,
-                'payment_method' => 'tiền mặt',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'vehicle_id' => 2,
-                'check_out' => Carbon::now()->subMinutes(90),
-                'price' => 20000,
-                'payment_method' => 'tiền mặt',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'vehicle_id' => 3,
-                'check_out' => Carbon::now()->subMinutes(45),
-                'price' => 30000,
-                'payment_method' => 'tiền mặt',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-        ]);
-
+        
         // DB::table('vehicles')->insert([
         //     [
         //         'user_id' => '5',
