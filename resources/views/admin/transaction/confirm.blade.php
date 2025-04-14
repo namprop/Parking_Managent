@@ -98,7 +98,7 @@
     <div class="buttons">
       <a href="/admin/vehicle" class="btn btn-cancel">Hủy</a>
 
-      <form action="{{ route('transaction.pay', $vehicle->id) }}" method="POST">
+      <form action="{{Auth::user()->level === \App\Utilities\Constant::user_level_admin ? route('transactionadmin.pay', $vehicle->id) : route('transaction.pay', $vehicle->id) }}" method="POST">
         @csrf
         <input type="hidden" name="sender" value="{{$vehicle->sender_name}}">
         <input type="hidden" name="vehicle_name" value="{{$vehicle->vehicleType->vehicle_name}}">

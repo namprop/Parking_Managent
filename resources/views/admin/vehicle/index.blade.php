@@ -1,15 +1,10 @@
-@extends('admin.layout.master1')
-
-@section('title', 'create')
-
-
+@extends(Auth::user()->level === \App\Utilities\Constant::user_level_admin ? 'admin.layout.master1' : 'admin.layout.masterEmployee')
 
 @section('body')
-  
-  
+    
   <!-- Thêm Xe -->
   <section class="mb-8" id="dashboard">
-    <a href="/admin/vehicle/create"
+    <a href="{{ Auth::user()->level === \App\Utilities\Constant::user_level_admin ? route('admin.vehicle.create') : route('employee.vehicle.create') }}"
         class="inline-block bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700 transition duration-200">
         + Thêm Xe Vào
     </a>
@@ -19,7 +14,7 @@
 <section id="vehicles">
     <div class="flex justify-between items-center mb-4">
         <h2 class="text-xl font-semibold text-gray-700">Danh sách phương tiện</h2>
-        <form method="GET" action="/admin/vehicle" class="flex space-x-2">
+        <form method="GET" action="" class="flex space-x-2">
             <input type="text" name="keyword" value="{{ $keyword ?? '' }}"
                 class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Tìm phương tiện...">
@@ -53,7 +48,7 @@
                     <td class="px-4 py-2">{{ $vehicle->vehicleType->vehicle_code }}</td>
                     <td class="px-4 py-2">{{ $vehicle->check_in }}</td>
                     <td class="px-4 py-2">
-                        <a href="{{ route('atransaction.confirm', $vehicle->id) }}"
+                        <a href="{{Auth::user()->level === \App\Utilities\Constant::user_level_admin ? route('transactionadmin.confirm', $vehicle->id) : route('transaction.confirm', $vehicle->id) }}"
                             class="text-blue-600 hover:underline font-medium">Thanh Toán</a>
                     </td>
                 </tr>
@@ -66,6 +61,4 @@
         {{ $vehicles->links() }}
     </div>
 </section>
-
-
 @endsection

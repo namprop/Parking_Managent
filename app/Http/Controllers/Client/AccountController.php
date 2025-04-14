@@ -1,21 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
-use App\Service\User\UserServiceInterface;
+use App\Utilities\Constant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Utilities\Constant;
 
 class AccountController extends Controller
 {
     //
-
     public function login()
     {
 
-        return view('front.account.login');
+        return view('user.account.login');
     }
 
     public function checkLogin(Request $request)

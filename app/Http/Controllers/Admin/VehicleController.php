@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Service\Vehicle\VehicleServiceInterface;
 use App\Service\VehicleType\VehicleTypeServiceInterface;
 use App\Models\User;
+use App\Utilities\Constant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VehicleController extends Controller
 {
@@ -29,7 +31,7 @@ class VehicleController extends Controller
         $keyword = $request->input('keyword', '');
         $vehicles = $this->vehicleService->searchAndPaginate('sender_name', $keyword);
 
-        return view('admin.vehicle.index', compact('vehicles', 'vehicleTypes', 'keyword',));
+        return view('admin.vehicle.index', compact('vehicles', 'vehicleTypes', 'keyword'));
     }
 
 
@@ -45,7 +47,9 @@ class VehicleController extends Controller
         $vehicleTypes = $this->vehicleTypeService->all();
         $vehicles = $this->vehicleService->all();
         $users = User::whereNotNull('account_code')->get();
+
         return view('admin.vehicle.create', compact('vehicles', 'vehicleTypes', 'users'));
+
     }
 
     /**
@@ -71,8 +75,12 @@ class VehicleController extends Controller
         }
         unset($data['account_code']);
         $this->vehicleService->create($data);
+
+        $view = Auth::user()->level === Constant :: user_level_admin
+        ? 'admin/vehicle'
+        : 'employee/vehicle';
     
-        return redirect('admin/vehicle')->with('success', 'Thêm xe thành công');
+        return redirect($view)->with('success', 'Thêm xe thành công');
     }
     
 
@@ -82,9 +90,7 @@ class VehicleController extends Controller
     public function show(string $id)
     {
         //
-        $vehicle = $this->vehicleService->find($id);
-        $vehicleTypes = $this->vehicleTypeService->all();
-        return view('admin.vehicle.show', compact('vehicle', 'vehicleTypes'));
+
     }
 
     /**

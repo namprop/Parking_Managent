@@ -1,17 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Client;
 
+use App\Http\Controllers\Controller;
 use App\Models\Vehicle;
-use App\Service\User\UserServiceInterface;
 use App\Service\Vehicle\VehicleServiceInterface;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     //
-
     protected $vehicleService;
 
     public function __construct(VehicleServiceInterface $vehicleService)
