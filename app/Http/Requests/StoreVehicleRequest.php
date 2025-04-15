@@ -24,7 +24,8 @@ class StoreVehicleRequest extends FormRequest
         return [
             'license_plate' => 'nullable|unique:vehicles,license_plate', 
             'vehicle_type_id' => 'required|exists:vehicle_types,id',  
-            'account_code' => 'nullable|exists:users,account_code', 
+            'account_code' => 'nullable|exists:users,account_code',
+            'time' => ['required', 'date_format:H:i'],
         ];
     }
 

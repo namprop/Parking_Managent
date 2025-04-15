@@ -3,6 +3,7 @@
 namespace App\Service\Transaction;
 
 use App\Service\BaseService;
+
 use App\Repositories\Transaction\TransactionRepositoryInterface;
 
 class TransactionService extends BaseService implements TransactionServiceInterface

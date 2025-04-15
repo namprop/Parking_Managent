@@ -25,6 +25,7 @@ Route::prefix('admin')->middleware('role:admin')->group(function () {
     Route::resource('vehicle', \App\Http\Controllers\Admin\VehicleController::class)->names('admin.vehicle');   
     Route::resource('vehicletype', \App\Http\Controllers\Admin\VehicleTypeController::class);
     Route::resource('user', \App\Http\Controllers\Admin\UserController::class);
+    Route::resource('pricingrule',\App\Http\Controllers\Admin\PricingRuleController::class);
     Route::get('/transaction', [\App\Http\Controllers\Admin\TransactionController::class, 'index']);
     Route::get('/transaction/{id}/confirm', [\App\Http\Controllers\Admin\TransactionController::class, 'confirm'])->name('transactionadmin.confirm');
     Route::post('/transaction/{id}/pay', [\App\Http\Controllers\Admin\TransactionController::class, 'pay'])->name('transactionadmin.pay');  

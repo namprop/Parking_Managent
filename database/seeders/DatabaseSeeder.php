@@ -30,6 +30,16 @@ class DatabaseSeeder extends Seeder
 
         DB::table('users')->insert([
             [
+                'name' => 'Admin1',
+                'email' => 'admin1@gmail.com',
+                'password' => Hash::make('123456'),
+                'avatar' => null,
+                'level' => 0,
+            ],
+        ]);
+
+        DB::table('users')->insert([
+            [
                 'name' => 'Nhan Vien 1',
                 'email' => 'employee@gmail.com',
                 'password' => Hash::make('123456'),
@@ -81,16 +91,50 @@ class DatabaseSeeder extends Seeder
                 'vehicle_types_id' => '2',
                 'sender_name' => 'Nguyen Van B',
                 'license_plate' => '22C1-67894',
-                
+
             ],
             [
                 'vehicle_types_id' => '3',
                 'sender_name' => 'Nguyen Van C',
-                'lincense' => '11H1-111111',
+                'lincense_plate' => '11H1-111111',
             ],
         ]);
 
-        
+
+        DB::table('pricing_rules')->insert([
+
+            [
+                'vehicle_type_id' => 1,
+                'day_of_week' => 'Mon-Fri',
+                'price' => 5000,
+                'start_time' => '22:00:00',
+                'end_time' => '06:00:00',
+                
+            ],
+            [
+                'vehicle_type_id' => 1,
+                'day_of_week' => 'Mon-Fri',
+                'price' => 3000,
+                'start_time' => '06:00:00',
+                'end_time' => '22:00:00',
+            ]
+
+        ]);
+
+        DB::table('transactions')->insert([
+            [
+                'employee_name' => 'Nhan Vien C',
+                'sender' => 'Nguyễn Văn A',
+                'vehicle_name' => 'O To',
+                'license_plate' => '29A-12345',
+                'check_in' => '2024/04/13',  
+                'check_out' => '2024/04/14',  
+                'price' => 150000,  
+                'payment_method' => 'tiền mặt',  
+            ],
+        ]);
+
+
         // DB::table('vehicles')->insert([
         //     [
         //         'user_id' => '5',

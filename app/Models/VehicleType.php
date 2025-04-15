@@ -16,4 +16,10 @@ class VehicleType extends Model
         return $this->hasMany(Vehicle::class, 'vehicle_types_id', 'id');
     }
 
+    public function pricingRule()
+    {
+
+        return $this->hasMany(PricingRule::class, 'vehicle_type_id', 'id');
+    }
+
 }

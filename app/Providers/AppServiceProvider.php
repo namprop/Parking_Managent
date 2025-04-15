@@ -24,6 +24,11 @@ use App\Repositories\VehicleType\VehicleTypeRepositoryInterface;
 use App\Service\VehicleType\VehicleTypeService;
 use App\Service\VehicleType\VehicleTypeServiceInterface;
 
+use App\Repositories\PricingRule\PricingRuleRepository;
+use App\Repositories\PricingRule\PricingRuleRepositoryInterface;
+use App\Service\PricingRule\PricingRuleService;
+use App\Service\PricingRule\PricingRuleServiceInterface;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -73,6 +78,16 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(
             VehicleTypeServiceInterface::class,
             VehicleTypeService::class
+        );
+
+        $this->app->singleton(
+            PricingRuleRepositoryInterface::class,
+            PricingRuleRepository::class
+        );
+
+        $this->app->singleton(
+            PricingRuleServiceInterface::class,
+            PricingRuleService::class
         );
     }
 
