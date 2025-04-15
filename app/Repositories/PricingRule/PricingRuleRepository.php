@@ -25,14 +25,14 @@ class PricingRuleRepository extends BaseRepository implements PricingRuleReposit
 
         if (in_array($day, ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'])) {
             if ($isNightTime) {
-                return PricingRule::where('vehicle_type_id', $vehicleTypeId)
+                return $this->model->where('vehicle_type_id', $vehicleTypeId)
                     ->where('day_of_week', 'Mon-Fri')
                     ->where('start_time', '>=', '22:00:00')
                     ->where('end_time', '<=', '06:00:00')
                     ->orderBy('price')
                     ->first();
             }
-            return PricingRule::where('vehicle_type_id', $vehicleTypeId)
+            return $this->model->where('vehicle_type_id', $vehicleTypeId)
                 ->where('day_of_week', 'Mon-Fri')
                 ->where('start_time', '<=', $time)
                 ->where('end_time', '>=', $time)
@@ -42,14 +42,14 @@ class PricingRuleRepository extends BaseRepository implements PricingRuleReposit
         if (in_array($day, ['Saturday', 'Sunday'])) {
 
             if ($isNightTime) {
-                return PricingRule::where('vehicle_type_id', $vehicleTypeId)
+                return $this->model->where('vehicle_type_id', $vehicleTypeId)
                 ->where('day_of_week', 'Sat-Sun')
                 ->where('start_time', '>=', '22:00:00')
                 ->where('end_time', '<=', '06:00:00')
                 ->orderBy('price')
                 ->first();
             }
-            return PricingRule::where('vehicle_type_id',$vehicleTypeId)
+            return $this->model->where('vehicle_type_id',$vehicleTypeId)
             ->where('day_of_week', 'Sat-Sun')
             ->where('start_time', '<=', $time)
             ->where('end_time', '>=', $time)
