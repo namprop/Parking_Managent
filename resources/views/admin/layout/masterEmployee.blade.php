@@ -17,6 +17,7 @@
             <nav class="space-y-4">
                 <a href="/employee/vehicle" class="block py-2 px-3 rounded hover:bg-gray-700 transition">Vehicle</a>
                 <a href="/employee/transaction" class="block py-2 px-3 rounded hover:bg-gray-700 transition">Transaction</a>
+                <a href="/employee/pricelist" class="block py-2 px-3 rounded hover:bg-gray-700 transition">PriceList</a>
             </nav>
         </div>
 

@@ -29,6 +29,11 @@ use App\Repositories\PricingRule\PricingRuleRepositoryInterface;
 use App\Service\PricingRule\PricingRuleService;
 use App\Service\PricingRule\PricingRuleServiceInterface;
 
+use App\Repositories\PriceList\PriceListRepository;
+use App\Repositories\PriceList\PriceListRepositoryInterface;
+use App\Service\PriceList\PriceListService;
+use App\Service\PriceList\PriceListServiceInterface;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -88,6 +93,16 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(
             PricingRuleServiceInterface::class,
             PricingRuleService::class
+        );
+
+        $this->app->singleton(
+            PriceListRepositoryInterface::class,
+            PriceListRepository::class
+        );
+
+        $this->app->singleton(
+            PriceListServiceInterface::class,
+            PriceListService::class
         );
     }
 

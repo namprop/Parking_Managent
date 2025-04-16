@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Service\PricingRule\PricingRuleServiceInterface;
+
+use App\Service\PriceList\PriceListServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Service\Vehicle\VehicleServiceInterface;
@@ -20,15 +21,21 @@ class TransactionController extends Controller
     protected $vehicleTypeService;
     protected $transactionService;
     protected $pricingRuleService;
+    protected $priceListService;
 
 
-    public function __construct(VehicleServiceInterface $vehicleService, VehicleTypeServiceInterface $vehicleTypeService, TransactionServiceInterface $transactionService, PricingRuleServiceInterface $pricingRuleService)
-    {
+    public function __construct(
+        VehicleServiceInterface $vehicleService,
+        VehicleTypeServiceInterface $vehicleTypeService,
+        TransactionServiceInterface $transactionService,
+        PriceListServiceInterface $priceListService
+    ) {
         $this->vehicleTypeService = $vehicleTypeService;
         $this->vehicleService = $vehicleService;
         $this->transactionService = $transactionService;
-        $this->pricingRuleService = $pricingRuleService;
+        $this->priceListService = $priceListService;
     }
+
 
     public function index()
     {
@@ -43,21 +50,22 @@ class TransactionController extends Controller
         $vehicleTypes = $this->vehicleTypeService->all();
 
         $timeIn = Carbon::parse($vehicle->check_in);
-        $day = Carbon::parse($timeIn)->format('l');
-        $timeOut = Carbon::now();
-        $hoursParked = max($timeIn->diffInHours($timeOut), 1);
-        $hoursParked = round($hoursParked, 0);
-        $rule = $this->pricingRuleService->getPriceFor($vehicle->vehicle_types_id, $timeIn); 
+        $timeOut = Carbon::parse($vehicle->check_out ?? Carbon::now());
 
-        $basePrice = $rule ? $rule->price : 0;  
-        $multiplier = ceil($hoursParked / 24);
-        $totalPrice = $basePrice * $multiplier;
-        
+        $hoursParked = max($timeIn->diffInHours($timeOut), 1);
+        $day = $timeIn->format('l');
+
+
+        $totalPrice = $this->priceListService->getPrice(
+            $vehicle->vehicle_types_id,
+            $timeIn,
+            $timeOut
+        );
+
         $pricingDetails = [[
             'hours' => $hoursParked,
             'time_in' => $timeIn->format('d/m/Y H:i'),
             'time_out' => $timeOut->format('d/m/Y H:i'),
-            'multiplier' => $multiplier,
             'price' => $totalPrice,
         ]];
 
@@ -72,6 +80,7 @@ class TransactionController extends Controller
             'totalPrice',
             'tienmat',
             'pricingDetails',
+            'day'
         ));
     }
 

@@ -11,15 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pricing_rules', function (Blueprint $table) {
+        Schema::create('price_lists', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('vehicle_type_id');
-            $table->string('day_of_week');
-            $table->time('start_time');
-            $table->time('end_time');
-            $table->decimal('price');
-            $table->timestamps();
+            $table->decimal('price_one_hour');
+            $table->decimal('price_half_day');
+            $table->decimal('price_full_day');
+            $table->decimal('price_week');
+            $table->decimal('price_month');
+
             $table->foreign('vehicle_type_id')->references('id')->on('vehicle_types');
+
+            
+            $table->timestamps();
         });
     }
 
@@ -28,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pricing_rules');
+        Schema::dropIfExists('price_lists');
     }
 };

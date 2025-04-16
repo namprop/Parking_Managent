@@ -22,4 +22,9 @@ class VehicleType extends Model
         return $this->hasMany(PricingRule::class, 'vehicle_type_id', 'id');
     }
 
+    public function priceList()
+    {
+        return $this->hasMany(Pricelist::class, 'vehicle_type_id', 'id');
+    }
+
 }

@@ -97,7 +97,7 @@
             </tr>
             <tr>
                 <th>Loại xe:</th>
-                <td>{{ $vehicle->vehicleType->vehicle_name }}</td>
+                <td>{{ $vehicle->vehicleType->vehicle_name ?? 'Không xác định' }}</td>
             </tr>
             <tr>
                 <th>Biển số:</th>
@@ -105,15 +105,15 @@
             </tr>
             <tr>
                 <th>Ngày gửi:</th>
-                <td>{{ $timeIn }}</td>
+                <td>{{ \Carbon\Carbon::parse($timeIn)->format('d/m/Y H:i') }}</td>
             </tr>
             <tr>
                 <th>Thời gian ra:</th>
-                <td>{{ $timeOut }}</td>
+                <td>{{ \Carbon\Carbon::parse($timeOut)->format('d/m/Y H:i') }}</td>
             </tr>
             <tr>
-                <th>Số Giờ Gửi :</th>
-                <td>{{ $hoursParked }} Giờ</td>
+                <th>Số Giờ Gửi:</th>
+                <td>{{ $hoursParked }} giờ</td>
             </tr>
             <tr>
                 <th>Tổng tiền:</th>
@@ -132,30 +132,30 @@
                 </tr>
             </thead>
             <tbody>
-              @foreach ($pricingDetails as $detail)
-              <tr>
-                  <td>Giờ {{ $detail['hours'] }}</td>
-                  <td>{{$detail['time_in']}}</td>
-                  <td>{{$detail['time_out']}}</td>
-                  <td>{{ number_format($detail['price']) }} đ</td>
-              </tr>
-          @endforeach
+                @foreach ($pricingDetails as $detail)
+                    <tr>
+                        <td>{{ $detail['hours'] }} giờ</td>
+                        <td>{{ $detail['time_in'] }}</td>
+                        <td>{{ $detail['time_out'] }}</td>
+                        <td>{{ number_format($detail['price']) }} đ</td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
 
         <div class="buttons">
-            <a href="/admin/vehicle" class="btn btn-cancel">Hủy</a>
+            <a href="{{ Auth::user()->level === \App\Utilities\Constant::user_level_admin ? '/admin/vehicle' : '/employee/vehicle' }}"
+                class="btn btn-cancel">Hủy</a>
 
-            <form
-                action="{{ Auth::user()->level === \App\Utilities\Constant::user_level_admin ? route('transactionadmin.pay', $vehicle->id) : route('transaction.pay', $vehicle->id) }}"
+            <form action="{{ Auth::user()->level === \App\Utilities\Constant::user_level_admin ? route('transactionadmin.pay', $vehicle->id) : route('transaction.pay', $vehicle->id) }}"
                 method="POST" style="display: inline;">
                 @csrf
                 <input type="hidden" name="sender" value="{{ $vehicle->sender_name }}">
-                <input type="hidden" name="vehicle_name" value="{{ $vehicle->vehicleType->vehicle_name }}">
+                <input type="hidden" name="vehicle_name" value="{{ $vehicle->vehicleType->vehicle_name ?? '' }}">
                 <input type="hidden" name="license_plate" value="{{ $vehicle->license_plate }}">
                 <input type="hidden" name="check_in" value="{{ $timeIn }}">
                 <input type="hidden" name="check_out" value="{{ $timeOut }}">
-                <input type="hidden" name="price" value="{{ $totalPrice}}">
+                <input type="hidden" name="price" value="{{ $totalPrice }}">
                 <input type="hidden" name="payment_method" value="{{ $tienmat }}">
                 <input type="hidden" name="employee_name" value="{{ Auth::user()->name }}">
                 <button type="submit" class="btn btn-confirm">Xác Nhận Thanh Toán</button>

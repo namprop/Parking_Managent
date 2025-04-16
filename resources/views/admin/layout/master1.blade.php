@@ -19,7 +19,7 @@
                 <a href="/admin/vehicle" class="block py-2 px-3 rounded hover:bg-gray-700 transition">Vehicle</a>
                 <a href="/admin/vehicletype" class="block py-2 px-3 rounded hover:bg-gray-700 transition">Vehicle Type</a>
                 <a href="/admin/transaction" class="block py-2 px-3 rounded hover:bg-gray-700 transition">Transaction</a>
-                <a href="/admin/pricingrule" class="block py-2 px-3 rounded hover:bg-gray-700 transition">PricingRule</a>
+                <a href="/admin/pricelist" class="block py-2 px-3 rounded hover:bg-gray-700 transition">PriceList</a>
             </nav>
         </div>
 

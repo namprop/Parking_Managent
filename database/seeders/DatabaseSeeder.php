@@ -101,26 +101,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        DB::table('pricing_rules')->insert([
-
-            [
-                'vehicle_type_id' => 1,
-                'day_of_week' => 'Mon-Fri',
-                'price' => 5000,
-                'start_time' => '22:00:00',
-                'end_time' => '06:00:00',
-                
-            ],
-            [
-                'vehicle_type_id' => 1,
-                'day_of_week' => 'Mon-Fri',
-                'price' => 3000,
-                'start_time' => '06:00:00',
-                'end_time' => '22:00:00',
-            ]
-
-        ]);
-
         DB::table('transactions')->insert([
             [
                 'employee_name' => 'Nhan Vien C',
@@ -131,6 +111,33 @@ class DatabaseSeeder extends Seeder
                 'check_out' => '2024/04/14',  
                 'price' => 150000,  
                 'payment_method' => 'tiền mặt',  
+            ],
+        ]);
+
+        DB::table('price_lists')->insert([
+            [
+                'vehicle_type_id' => 1,
+                'price_one_hour' => 1000,
+                'price_half_day' => 2000,
+                'price_full_day' => 3000,
+                'price_week' => 15000,
+                'price_month' => 50000,
+            ],
+            [
+                'vehicle_type_id' => 2,
+                'price_one_hour' => 5000,
+                'price_half_day' => 10000,
+                'price_full_day' => 15000,
+                'price_week' => 50000,
+                'price_month' => 100000,
+            ],
+            [
+                'vehicle_type_id' => 3,
+                'price_one_hour' => 20000,
+                'price_half_day' => 40000,
+                'price_full_day' => 60000,
+                'price_week' => 200000,
+                'price_month' => 500000,
             ],
         ]);
 
