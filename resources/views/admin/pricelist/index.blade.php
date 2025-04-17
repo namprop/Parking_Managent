@@ -1,83 +1,61 @@
 @extends(Auth::user()->level === \App\Utilities\Constant::user_level_admin ? 'admin.layout.master1' : 'admin.layout.masterEmployee')
 
 @section('body')
-    <div class="w-full max-w-4xl mx-auto mt-10">
-        <div class="flex justify-between items-center mb-4">
-            <h1 class="text-2xl font-bold text-gray-700 uppercase">Bảng Giá Gửi Xe</h1>
-            {{-- @if (Auth::user()->level === \App\Utilities\Constant::user_level_admin)
-                <a href=""
-                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm shadow transition">
-                    Sửa đổi
-                </a>
-            @endif --}}
-        </div>
-
-        <div class="overflow-x-auto shadow-md rounded-lg">
-            <table class="w-full table-auto border-collapse text-center text-sm text-gray-700">
-                <thead class="bg-gray-200 text-gray-800">
-                    <tr>
-                        <th class="border px-4 py-3">Loại xe</th>
-                        @foreach ($pricelists as $pricelist)
-                            <th class="border px-4 py-3">{{ ucfirst($pricelist->vehicleType->vehicle_name) }}</th>
-                        @endforeach
-                    </tr>
-                </thead>
-                <tbody class="bg-white">
-                    <tr class="odd:bg-gray-50">
-                        <td class="border px-4 py-3 font-medium">Giá Một Giờ</td>
-                        @foreach ($pricelists as $pricelist)
-                            <td class="border px-4 py-3">{{ number_format($pricelist->price_one_hour, 0, ',', '.') }}đ/lượt
-                            </td>
-                        @endforeach
-                    </tr>
-                    <tr class="odd:bg-gray-50">
-                        <td class="border px-4 py-3 font-medium">Giá Nửa Ngày</td>
-                        @foreach ($pricelists as $pricelist)
-                            <td class="border px-4 py-3">{{ number_format($pricelist->price_half_day, 0, ',', '.') }}đ/lượt
-                            </td>
-                        @endforeach
-                    </tr>
-                    <tr class="odd:bg-gray-50">
-                        <td class="border px-4 py-3 font-medium">Giá Một Ngày</td>
-                        @foreach ($pricelists as $pricelist)
-                            <td class="border px-4 py-3">{{ number_format($pricelist->price_full_day, 0, ',', '.') }}đ/lượt
-                            </td>
-                        @endforeach
-                    </tr>
-                    <tr class="odd:bg-gray-50">
-                        <td class="border px-4 py-3 font-medium">Giá Một Tuần</td>
-                        @foreach ($pricelists as $pricelist)
-                            <td class="border px-4 py-3">{{ number_format($pricelist->price_week, 0, ',', '.') }}đ/tuần</td>
-                        @endforeach
-                    </tr>
-                    <tr class="odd:bg-gray-50">
-                        <td class="border px-4 py-3 font-medium">Giá Một Tháng</td>
-                        @foreach ($pricelists as $pricelist)
-                            <td class="border px-4 py-3">{{ number_format($pricelist->price_month, 0, ',', '.') }}đ/tháng
-                            </td>
-                        @endforeach
-                    </tr>
-
-                    @if (Auth::user()->level === \App\Utilities\Constant::user_level_admin)
-                        <tr class="bg-gray-50">
-                            <td class="border px-4 py-3 font-semibold text-gray-700 text-left"></td>
-                            @foreach ($pricelists as $pricelist)
-                                <td class="border px-4 py-3 text-center">
-                                    <a href="/admin/pricelist/{{$pricelist->id}}/edit"
-                                        class="inline-flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 bg-white hover:bg-blue-50 border border-blue-200 px-3 py-1 rounded-md shadow-sm transition">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M15.232 5.232l3.536 3.536M9 13l6.536-6.536a2 2 0 112.828 2.828L11.828 15.828a2 2 0 01-1.414.586H7v-3.414a2 2 0 01.586-1.414z" />
-                                        </svg>
-                                        Điều chỉnh
-                                    </a>
-                                </td>
-                            @endforeach
-                        </tr>
-                    @endif
-                </tbody>
-            </table>
-        </div>
+<div class="max-w-7xl mx-auto p-4">
+    <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold text-gray-700">Bảng giá dịch vụ</h2>
+        <a href="/admin/pricelist/create"
+           class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 text-sm">
+            + Thêm mới
+        </a>
     </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        @foreach($pricelist as $vehicleTypeId => $priceGroup)
+            <div class="bg-white shadow border border-gray-200 rounded-lg p-4">
+                <h3 class="text-base font-semibold text-gray-800 mb-3 text-center">
+                    Loại xe: {{ $priceGroup->first()->vehicleType->vehicle_name }}
+                </h3>
+
+                <div class="overflow-x-auto">
+                    <table class="min-w-full text-xs border border-gray-200 rounded-lg overflow-hidden">
+                        <thead class="bg-gray-100 text-gray-700">
+                            <tr>
+                                <th class="px-2 py-1 border">Thoi Gian</th>
+                                <th class="px-2 py-1 border">Thời lượng</th>
+                                <th class="px-2 py-1 border">Giá</th>
+                                <th class="px-2 py-1 border text-center">Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            @foreach($priceGroup as $item)
+                                <tr>
+                                    <td class="px-2 py-1 border">{{ $item->duration_label }}</td>
+                                    <td class="px-2 py-1 border text-center">{{ $item->duration }} giờ</td>
+                                    <td class="px-2 py-1 border text-right">
+                                        {{ number_format($item->price, 0, ',', '.') }} đ
+                                    </td>
+                                    <td class="px-2 py-1 border text-center space-x-1">
+                                        <a href="/admin/pricelist/{{$item->id}}/edit"
+                                           class="text-blue-500 hover:underline text-xs">Sửa</a>
+                                        <form action="/admin/pricelist/{{ $item->id }}"
+                                              method="POST" class="inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                    onclick="return confirm('Bạn có chắc chắn muốn xóa?')"
+                                                    class="text-red-500 hover:underline text-xs">
+                                                Xóa
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        @endforeach
+    </div>
+</div>
 @endsection

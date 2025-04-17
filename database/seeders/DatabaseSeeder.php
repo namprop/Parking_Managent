@@ -115,31 +115,60 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('price_lists')->insert([
-            [
-                'vehicle_type_id' => 1,
-                'price_one_hour' => 1000,
-                'price_half_day' => 2000,
-                'price_full_day' => 3000,
-                'price_week' => 15000,
-                'price_month' => 50000,
-            ],
-            [
-                'vehicle_type_id' => 2,
-                'price_one_hour' => 5000,
-                'price_half_day' => 10000,
-                'price_full_day' => 15000,
-                'price_week' => 50000,
-                'price_month' => 100000,
-            ],
-            [
-                'vehicle_type_id' => 3,
-                'price_one_hour' => 20000,
-                'price_half_day' => 40000,
-                'price_full_day' => 60000,
-                'price_week' => 200000,
-                'price_month' => 500000,
-            ],
+
+            ['vehicle_type_id' => 1, 
+            'duration_label' => '1 Giờ', 
+            'duration' => 1, 
+            'price' => 1200],
+
+            ['vehicle_type_id' => 1, 'duration_label' => 'Nửa Ngày', 'duration' => 12, 'price' => 2000],
+            ['vehicle_type_id' => 1, 'duration_label' => '1 Ngày', 'duration' => 24, 'price' => 3000],
+            ['vehicle_type_id' => 1, 'duration_label' => '1 Tuần', 'duration' => 24*7, 'price' => 15000],
+            ['vehicle_type_id' => 1, 'duration_label' => '1 Tháng', 'duration' => 24*30, 'price' => 50000],
+
+            ['vehicle_type_id' => 2, 'duration_label' => '1 Giờ', 'duration' => 1, 'price' => 5000],
+            ['vehicle_type_id' => 2, 'duration_label' => 'Nửa Ngày', 'duration' => 12, 'price' => 10000],
+            ['vehicle_type_id' => 2, 'duration_label' => '1 Ngày', 'duration' => 24, 'price' => 15000],
+            ['vehicle_type_id' => 2, 'duration_label' => '1 Tuần', 'duration' => 24*7, 'price' => 50000],
+            ['vehicle_type_id' => 2, 'duration_label' => '1 Tháng', 'duration' => 24*30, 'price' => 100000],
+
+            ['vehicle_type_id' => 3, 'duration_label' => '1 Giờ', 'duration' => 1, 'price' => 20000],
+            ['vehicle_type_id' => 3, 'duration_label' => 'Nửa Ngày', 'duration' => 12, 'price' => 40000],
+            ['vehicle_type_id' => 3, 'duration_label' => '1 Ngày', 'duration' => 24, 'price' => 60000],
+            ['vehicle_type_id' => 3, 'duration_label' => '1 Tuần', 'duration' => 24*7, 'price' => 200000],
+            ['vehicle_type_id' => 3, 'duration_label' => '1 Tháng', 'duration' => 24*30, 'price' => 500000],
+
         ]);
+           
+
+
+
+        // DB::table('price_lists')->insert([
+        //     [
+        //         'vehicle_type_id' => 1,
+        //         'price_one_hour' => 1000,
+        //         'price_half_day' => 2000,
+        //         'price_full_day' => 3000,
+        //         'price_week' => 15000,
+        //         'price_month' => 50000,
+        //     ],
+        //     [
+        //         'vehicle_type_id' => 2,
+        //         'price_one_hour' => 5000,
+        //         'price_half_day' => 10000,
+        //         'price_full_day' => 15000,
+        //         'price_week' => 50000,
+        //         'price_month' => 100000,
+        //     ],
+        //     [
+        //         'vehicle_type_id' => 3,
+        //         'price_one_hour' => 20000,
+        //         'price_half_day' => 40000,
+        //         'price_full_day' => 60000,
+        //         'price_week' => 200000,
+        //         'price_month' => 500000,
+        //     ],
+        // ]);
 
 
         // DB::table('vehicles')->insert([

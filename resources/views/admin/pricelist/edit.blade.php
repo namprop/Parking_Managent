@@ -1,4 +1,4 @@
-@extends(Auth::user()->level === \App\Utilities\Constant::user_level_admin ? 'admin.layout.master1' : 'admin.layout.masterEmployee')
+@extends('admin.layout.master1')
 
 @section('body')
 
@@ -10,32 +10,23 @@
     @method('PUT')
 
     <div>
-      <label class="block text-sm font-medium text-gray-700 mb-1">Giá Một Giờ</label>
-      <input type="number" name="price_one_hour" value="{{ $pricelist->price_one_hour }}" class="w-full border rounded px-3 py-2" required>
+      <label class="block text-sm font-medium text-gray-700 mb-1">Số Giờ</label>
+      <input type="number" name="duration" value="{{ $pricelist->duration }}" class="w-full border rounded px-3 py-2" required>
     </div>
 
     <div>
-      <label class="block text-sm font-medium text-gray-700 mb-1">Giá Nửa Ngày</label>
-      <input type="number" name="price_half_day" value="{{  $pricelist->price_half_day }}" class="w-full border rounded px-3 py-2" required>
+      <label class="block text-sm font-medium text-gray-700 mb-1">Thời Gian</label>
+      <input type="string" name="duration_label" value="{{$pricelist->duration_label}}" class="w-full border rounded px-3 py-2" required>
     </div>
 
     <div>
-      <label class="block text-sm font-medium text-gray-700 mb-1">Giá Một Ngày</label>
-      <input type="number" name="price_full_day" value="{{ $pricelist->price_full_day }}" class="w-full border rounded px-3 py-2" required>
+      <label class="block text-sm font-medium text-gray-700 mb-1">Gia (VND)</label>
+      <input type="number" name="price" value="{{ $pricelist->price }}" class="w-full border rounded px-3 py-2" required>
     </div>
 
-    <div>
-      <label class="block text-sm font-medium text-gray-700 mb-1">Giá Một Tuần</label>
-      <input type="number" name="price_week" value="{{$pricelist->price_week }}" class="w-full border rounded px-3 py-2" required>
-    </div>
-
-    <div>
-      <label class="block text-sm font-medium text-gray-700 mb-1">Giá Một Tháng</label>
-      <input type="number" name="price_month" value="{{ $pricelist->price_month }}" class="w-full border rounded px-3 py-2" required>
-    </div>
 
     <div class="flex justify-end gap-3">
-        <a href="{{ route('pricelist.index') }}"
+        <a href="/admin/pricelist"
            class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400 transition">
            Huỷ
         </a>

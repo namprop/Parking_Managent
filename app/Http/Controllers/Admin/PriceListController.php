@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\PriceList;
 use App\Service\PriceList\PriceListServiceInterface;
+use App\Service\VehicleType\VehicleTypeServiceInterface;
 use Illuminate\Http\Request;
 
 class PriceListController extends Controller
@@ -12,16 +14,21 @@ class PriceListController extends Controller
      * Display a listing of the resource.
      */
 
-     public function __construct( private PriceListServiceInterface $priceListService){
+    protected $priceListService;
 
-     }
+    public function __construct(PriceListServiceInterface $priceListService)
+    {
+        $this->priceListService = $priceListService;
+    }
 
 
     public function index()
     {
-        //
-        $pricelists = $this->priceListService->all();
-        return view('admin.pricelist.index',compact('pricelists'));
+
+        $pricelist = $this->priceListService->all()->groupBy('vehicle_type_id');
+        
+
+        return view('admin.pricelist.index', compact('pricelist'));
     }
 
     /**
@@ -30,7 +37,9 @@ class PriceListController extends Controller
     public function create()
     {
         //
-        
+        $pricelist = $this->priceListService->all()->groupBy('vehicle_type_id');
+        return view('admin.pricelist.create', compact('pricelist'));
+
     }
 
     /**
@@ -39,6 +48,9 @@ class PriceListController extends Controller
     public function store(Request $request)
     {
         //
+        $data = $request->all();
+        $this->priceListService->create($data);
+        return redirect('/admin/pricelist');
     }
 
     /**
@@ -59,7 +71,7 @@ class PriceListController extends Controller
         $pricelist = $this->priceListService->find($id);
 
 
-        return view('admin.pricelist.edit',compact('pricelist'));
+        return view('admin.pricelist.edit', compact('pricelist'));
     }
 
     /**
@@ -73,7 +85,7 @@ class PriceListController extends Controller
         $this->priceListService->update($data, $id);
 
         return redirect('/admin/pricelist');
-    } 
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -81,5 +93,7 @@ class PriceListController extends Controller
     public function destroy(string $id)
     {
         //
+        $this->priceListService->delete($id);
+        return redirect('/admin/pricelist');
     }
 }

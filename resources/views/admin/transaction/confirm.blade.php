@@ -117,7 +117,7 @@
             </tr>
             <tr>
                 <th>Tổng tiền:</th>
-                <td class="total">{{ number_format($totalPrice) }} đ</td>
+                <td class="total">{{ number_format($priceResult) }} đ</td>
             </tr>
         </table>
 
@@ -132,14 +132,12 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($pricingDetails as $detail)
                     <tr>
-                        <td>{{ $detail['hours'] }} giờ</td>
-                        <td>{{ $detail['time_in'] }}</td>
-                        <td>{{ $detail['time_out'] }}</td>
-                        <td>{{ number_format($detail['price']) }} đ</td>
+                        <td>{{$hoursParked}} giờ</td>
+                        <td>{{$timeIn}}</td>
+                        <td>{{$timeOut}}</td>
+                        <td>{{$priceResult}}</td>
                     </tr>
-                @endforeach
             </tbody>
         </table>
 
@@ -155,7 +153,7 @@
                 <input type="hidden" name="license_plate" value="{{ $vehicle->license_plate }}">
                 <input type="hidden" name="check_in" value="{{ $timeIn }}">
                 <input type="hidden" name="check_out" value="{{ $timeOut }}">
-                <input type="hidden" name="price" value="{{ $totalPrice }}">
+                <input type="hidden" name="price" value="{{$priceResult}}">
                 <input type="hidden" name="payment_method" value="{{ $tienmat }}">
                 <input type="hidden" name="employee_name" value="{{ Auth::user()->name }}">
                 <button type="submit" class="btn btn-confirm">Xác Nhận Thanh Toán</button>

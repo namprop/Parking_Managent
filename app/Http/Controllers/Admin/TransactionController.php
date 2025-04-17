@@ -45,44 +45,30 @@ class TransactionController extends Controller
     }
 
     public function confirm($id)
-    {
-        $vehicle = $this->vehicleService->find($id);
-        $vehicleTypes = $this->vehicleTypeService->all();
+{
+    $vehicle = $this->vehicleService->find($id);
+    $vehicleTypes = $this->vehicleTypeService->all();
+    $timeIn = Carbon::parse($vehicle->check_in);
+    $timeOut = Carbon::parse($vehicle->check_out ?? Carbon::now());
+    $hoursParked = ceil($timeIn->floatDiffInRealHours($timeOut));
 
-        $timeIn = Carbon::parse($vehicle->check_in);
-        $timeOut = Carbon::parse($vehicle->check_out ?? Carbon::now());
+    $vehicleTypeId = $vehicle->vehicle_type_id ?? $vehicle->vehicle_types_id;
 
-        $hoursParked = max($timeIn->diffInHours($timeOut), 1);
-        $day = $timeIn->format('l');
+    $priceResult = $this->priceListService->getPrice($vehicleTypeId, $timeIn, $timeOut);
 
 
-        $totalPrice = $this->priceListService->getPrice(
-            $vehicle->vehicle_types_id,
-            $timeIn,
-            $timeOut
-        );
+    $tienmat = 'tiền mặt';
 
-        $pricingDetails = [[
-            'hours' => $hoursParked,
-            'time_in' => $timeIn->format('d/m/Y H:i'),
-            'time_out' => $timeOut->format('d/m/Y H:i'),
-            'price' => $totalPrice,
-        ]];
-
-        $tienmat = 'tiền mặt';
-
-        return view('admin.transaction.confirm', compact(
-            'vehicle',
-            'vehicleTypes',
-            'timeIn',
-            'timeOut',
-            'hoursParked',
-            'totalPrice',
-            'tienmat',
-            'pricingDetails',
-            'day'
-        ));
-    }
+    return view('admin.transaction.confirm', compact(
+        'vehicle',
+        'vehicleTypes',
+        'timeIn',
+        'timeOut',
+        'hoursParked',
+        'tienmat',
+        'priceResult'
+    ));
+}
 
 
     public function pay(Request $request, $id)

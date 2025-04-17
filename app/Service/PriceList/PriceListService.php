@@ -19,4 +19,11 @@ class PriceListService extends BaseService implements PriceListServiceInterface
     {
         return $this->repository->getPrice($vehicleTypeId, $checkIn, $checkOut);
     }
+
+    public function getDuration()
+    {
+        return $this->repository->getDuration();
+    }
+
+
 }

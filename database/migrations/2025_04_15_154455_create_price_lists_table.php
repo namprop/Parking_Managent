@@ -14,12 +14,10 @@ return new class extends Migration
         Schema::create('price_lists', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('vehicle_type_id');
-            $table->decimal('price_one_hour');
-            $table->decimal('price_half_day');
-            $table->decimal('price_full_day');
-            $table->decimal('price_week');
-            $table->decimal('price_month');
-
+            $table->string('duration_label');
+            $table->integer('duration');
+            $table->decimal('price');
+           
             $table->foreign('vehicle_type_id')->references('id')->on('vehicle_types');
 
             
