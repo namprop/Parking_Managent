@@ -16,8 +16,11 @@ class PriceListController extends Controller
 
     protected $priceListService;
 
-    public function __construct(PriceListServiceInterface $priceListService)
+    protected $vehicleTypeService;
+
+    public function __construct(PriceListServiceInterface $priceListService, VehicleTypeServiceInterface $vehicleTypeService)
     {
+        $this->vehicleTypeService = $vehicleTypeService;
         $this->priceListService = $priceListService;
     }
 
@@ -37,8 +40,10 @@ class PriceListController extends Controller
     public function create()
     {
         //
-        $pricelist = $this->priceListService->all()->groupBy('vehicle_type_id');
-        return view('admin.pricelist.create', compact('pricelist'));
+        $pricelist = $this->priceListService->all();
+        $vehicleTypes = $this->vehicleTypeService->all();
+
+        return view('admin.pricelist.create', compact('pricelist', 'vehicleTypes'));
 
     }
 

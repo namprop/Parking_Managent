@@ -16,9 +16,9 @@ return new class extends Migration
             $table->unsignedBigInteger('vehicle_type_id');
             $table->string('duration_label');
             $table->integer('duration');
-            $table->decimal('price');
+            $table->integer('price');
            
-            $table->foreign('vehicle_type_id')->references('id')->on('vehicle_types');
+            $table->foreign('vehicle_type_id')->references('id')->on('vehicle_types')->onDelete('cascade');
 
             
             $table->timestamps();
