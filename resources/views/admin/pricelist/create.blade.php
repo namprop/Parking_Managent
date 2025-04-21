@@ -7,11 +7,22 @@
         <form method="POST" action="/admin/pricelist" class="space-y-4 bg-white p-6 rounded-lg shadow-md">
             @csrf
 
+            @if ($errors->any())
+                <div class="bg-red-100 text-red-700 p-4 rounded-lg mb-4">
+                    <ul class="list-disc pl-5">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+
             <div>
                 <label for="vehicle_types_id" class="block text-gray-600">Chọn loại xe:</label>
                 <select name="vehicle_type_id" id="vehicle_types_id" required class="w-full p-2 border rounded-lg">
                     @foreach ($vehicleTypes as $vehicleTypes)
-                        <option value="{{$vehicleTypes->id}}">
+                        <option value="{{ $vehicleTypes->id }}">
                             {{ $vehicleTypes->vehicle_name }}
                         </option>
                     @endforeach

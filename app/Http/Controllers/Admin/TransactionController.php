@@ -48,8 +48,10 @@ class TransactionController extends Controller
 {
     $vehicle = $this->vehicleService->find($id);
     $vehicleTypes = $this->vehicleTypeService->all();
+    
     $timeIn = Carbon::parse($vehicle->check_in);
     $timeOut = Carbon::parse($vehicle->check_out ?? Carbon::now());
+    
     $hoursParked = ceil($timeIn->floatDiffInRealHours($timeOut));
 
     $vehicleTypeId = $vehicle->vehicle_type_id ?? $vehicle->vehicle_types_id;

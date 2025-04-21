@@ -2,6 +2,18 @@
 
 @section('body')
 <div class="max-w-7xl mx-auto p-4">
+
+    @if (!empty($warnings))
+        <div class="mb-4 p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 rounded">
+            <strong class="block font-semibold mb-2">Cảnh báo về dữ liệu giá:</strong>
+            <ul class="list-disc list-inside text-sm">
+                @foreach ($warnings as $warning)
+                    <li>{{ $warning }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <div class="flex justify-between items-center mb-4">
         <h2 class="text-xl font-semibold text-gray-700">Bảng giá dịch vụ</h2>
         @if(Auth::user()->level === \App\Utilities\Constant::user_level_admin)
@@ -38,7 +50,7 @@
                                     <td class="px-2 py-1 border text-center">{{ $item->duration }} giờ</td>
                                     <td class="px-2 py-1 border text-right">
                                         {{ number_format($item->price, 0, ',', '.') }} đ
-                                    </td>
+                                    </td> 
 
                                     @if(Auth::user()->level === \App\Utilities\Constant::user_level_admin)
                                     <td class="px-2 py-1 border text-center space-x-1">
@@ -54,9 +66,9 @@
                                                 Xóa
                                             </button>
                                         </form>
-                                        @endif
-
                                     </td>
+                                    @endif
+
                                 </tr>
                             @endforeach
                         </tbody>

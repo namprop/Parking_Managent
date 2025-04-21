@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\PriceList;
 use App\Service\PriceList\PriceListServiceInterface;
 use App\Service\VehicleType\VehicleTypeServiceInterface;
+use App\Utilities\ValidationRules;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PriceListController extends Controller
 {
@@ -27,11 +29,13 @@ class PriceListController extends Controller
 
     public function index()
     {
+        $pricelist = $this->priceListService->all()
+            ->sortBy('duration')
+            ->groupBy('vehicle_type_id');
 
-        $pricelist = $this->priceListService->all()->groupBy('vehicle_type_id');
-        
+        $warnings = $this->priceListService->checkErrorSort($pricelist);
 
-        return view('admin.pricelist.index', compact('pricelist'));
+        return view('admin.pricelist.index', compact('pricelist', 'warnings'));
     }
 
     /**
@@ -44,7 +48,6 @@ class PriceListController extends Controller
         $vehicleTypes = $this->vehicleTypeService->all();
 
         return view('admin.pricelist.create', compact('pricelist', 'vehicleTypes'));
-
     }
 
     /**
@@ -53,6 +56,16 @@ class PriceListController extends Controller
     public function store(Request $request)
     {
         //
+        $validator = Validator::make(
+            $request->all(),
+            ValidationRules::rulePriceList(),
+            ValidationRules::messages()
+        );
+
+        if($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
         $data = $request->all();
         $this->priceListService->create($data);
         return redirect('/admin/pricelist');
@@ -72,9 +85,10 @@ class PriceListController extends Controller
     public function edit(string $id)
     {
         //
+        
 
         $pricelist = $this->priceListService->find($id);
-
+        
 
         return view('admin.pricelist.edit', compact('pricelist'));
     }

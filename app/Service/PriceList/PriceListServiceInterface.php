@@ -11,4 +11,6 @@ interface PriceListServiceInterface extends ServiceInterface
 
     function getDuration();
 
+    function checkErrorSort($pricelist);
+
 }

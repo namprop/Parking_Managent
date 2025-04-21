@@ -18,6 +18,8 @@ return new class extends Migration
             $table->integer('duration');
             $table->integer('price');
            
+            $table->unique(['vehicle_type_id', 'duration']);
+            $table->unique(['vehicle_type_id', 'duration_label']);
             $table->foreign('vehicle_type_id')->references('id')->on('vehicle_types')->onDelete('cascade');
 
             
